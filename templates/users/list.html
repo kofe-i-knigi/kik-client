@@ -6,6 +6,12 @@
 
 <section class="content">
 
-  <div>Пользователи</div>
+  <table ng-table="vm.tableParams" class="table table-bordered table-hover">
+    <tr ng-repeat="user in $data">
+      <td data-title="'Логин'">{{user.login}}</td>
+      <td data-title="'Имя'">{{user.name}}</td>
+      <td data-title="'Блокировка'">{{user.isBlocked ? 'заблокирован' : ''}}</td>
+    </tr>
+  </table>
 
 </section>

@@ -1,18 +1,27 @@
 import angular from 'angular';
 import routes from './routes';
 import uiRouter from 'angular-ui-router';
+import angularJwt from 'angular-jwt';
+require('ng-table');
 
-import controllers from './controllers';
 import services from './services';
 
 angular.module('KIK', [
   uiRouter,
-  services,
-  controllers
+  angularJwt,
+  'ngTable',
+  services
 ])
 
-.config(($locationProvider) => {
+.config(($locationProvider, $httpProvider, jwtInterceptorProvider) => {
   $locationProvider.html5Mode(true).hashPrefix('!');
+
+  jwtInterceptorProvider.tokenGetter = function() {
+    return localStorage.getItem('idToken');
+  };
+
+  $httpProvider.interceptors.push('jwtInterceptor');
+  $httpProvider.interceptors.push('apiErrorHandler');
 })
 
 .run(['$rootScope', '$state', ($rootScope, $state) => {
@@ -21,7 +30,7 @@ angular.module('KIK', [
     if (error.status == 404) {
       $state.go('pages.404');
     } else {
-      console.error('Ошибка соединения')
+      console.error('Ошибка соединения');
     }
   });
 }])

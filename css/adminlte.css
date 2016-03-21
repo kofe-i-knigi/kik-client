@@ -4727,3 +4727,5 @@ table.text-center th {
     white-space: normal!important;
   }
 }
+
+.ng-table-counts { display: none !important; }

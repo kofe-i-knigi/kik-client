@@ -1,0 +1,42 @@
+<div class="hold-transition register-page">
+  <div class="register-box">
+    <div class="register-logo">
+      <a>Кофе и книги</a>
+    </div>
+
+    <div class="register-box-body">
+      <p class="login-box-msg">Регистрация</p>
+      <form ng-submit="vm.register()">
+        <div class="form-group has-feedback">
+          <input type="text" class="form-control" ng-model="vm.user.name" placeholder="Имя" required>
+          <span class="glyphicon glyphicon-user form-control-feedback"></span>
+        </div>
+        <div class="form-group has-feedback">
+          <input type="text" class="form-control" ng-model="vm.user.login" placeholder="Логин" required>
+          <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+        </div>
+        <div class="form-group has-feedback">
+          <input type="password" class="form-control" ng-model="vm.user.password" placeholder="Пароль" required>
+          <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        </div>
+        <div class="form-group has-feedback">
+          <input type="password" class="form-control" ng-model="vm.user.passwordConfirm" placeholder="Повторите пароль" required>
+          <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+        </div>
+        <div class="form-group has-feedback">
+          <input type="text" class="form-control" ng-model="vm.user.regToken" placeholder="Код регистрации" required>
+          <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        </div>
+        <div class="row">
+          <div class="col-xs-8">
+          </div>
+          <div class="col-xs-4">
+            <button type="submit" class="btn btn-primary btn-block btn-flat">Зарегистрироваться</button>
+          </div>
+        </div>
+      </form>
+
+      <a ui-sref="login" class="text-center">Вход</a>
+    </div>
+  </div>
+</div>

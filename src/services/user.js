@@ -1,5 +1,7 @@
+import {API_BASE} from '../config';
+
 export default function User($resource) {
-  return $resource('/api/admin/users/:userId');
+  return $resource(`${API_BASE}/admin/users/:userId`);
 }
 
 User.$inject = ['$resource'];

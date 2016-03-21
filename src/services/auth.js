@@ -1,7 +1,9 @@
+import {API_BASE} from '../config';
+
 export default function Auth($http) {
   return {
     logIn(creds) {
-      const promise = $http.post('/api/auth/login', creds);
+      const promise = $http.post(`${API_BASE}/auth/login`, creds);
 
       promise.then((res) => {
         localStorage.idToken = res.data.token;
@@ -9,6 +11,20 @@ export default function Auth($http) {
       });
 
       return promise;
+    },
+
+    register(creds) {
+      const promise = $http.post(`${API_BASE}/auth/register`, creds);
+
+      promise.then((res) => {
+        localStorage.idToken = res.data.token;
+      });
+
+      return promise;
+    },
+
+    getRegToken() {
+      return $http.get(`${API_BASE}/admin/auth/regtoken`);
     }
   }
 }
