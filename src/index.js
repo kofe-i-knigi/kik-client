@@ -5,12 +5,14 @@ import angularJwt from 'angular-jwt';
 require('ng-table');
 
 import services from './services';
+import directives from './directives';
 
 angular.module('KIK', [
   uiRouter,
   angularJwt,
   'ngTable',
-  services
+  services,
+  directives
 ])
 
 .config(($locationProvider, $httpProvider, jwtInterceptorProvider) => {
@@ -23,17 +25,6 @@ angular.module('KIK', [
   $httpProvider.interceptors.push('jwtInterceptor');
   $httpProvider.interceptors.push('apiErrorHandler');
 })
-
-.run(['$rootScope', '$state', ($rootScope, $state) => {
-
-  $rootScope.$on('$stateChangeError', (event, toState, toParams, fromState, fromParams, error) => {
-    if (error.status == 404) {
-      $state.go('pages.404');
-    } else {
-      console.error('Ошибка соединения');
-    }
-  });
-}])
 
 .config(['$stateProvider', routes])
 

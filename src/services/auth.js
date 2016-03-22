@@ -7,7 +7,6 @@ export default function Auth($http) {
 
       promise.then((res) => {
         localStorage.idToken = res.data.token;
-        console.log(localStorage.idToken);
       });
 
       return promise;

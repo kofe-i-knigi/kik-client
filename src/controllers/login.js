@@ -1,22 +1,21 @@
-class LoginCtrl {
+export default class LoginCtrl {
   constructor($state, Auth) {
-    const vm = this;
+    this.$state = $state;
+    this.Auth = Auth;
+  }
 
-    vm.logIn = () => {
-      if (!(vm.login && vm.password)) {
+  logIn() {
+      if (!(this.login && this.password)) {
         return
       }
 
-      Auth.logIn({
-        login: vm.login,
-        password: vm.password
+      this.Auth.logIn({
+        login: this.login,
+        password: this.password
       })
-      .then(() => $state.go('admin.users.list'))
+      .then(() => this.$state.go('admin.users'))
       .catch((res) => console.log(res.data));
-    };
   }
 }
 
 LoginCtrl.$inject = ['$state', 'Auth'];
-
-export default LoginCtrl;

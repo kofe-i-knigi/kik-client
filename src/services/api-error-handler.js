@@ -6,11 +6,8 @@ export default function apiErrorHanler($q, $window) {
       case 403:
         $window.location = '/login';
         break;
-      case 500:
-        $window.location = '/500';
-        break;
-      case 404:
-        //$window.location = '/404';
+      // case 404:
+      //   $window.location = '/404';
       }
       return $q.reject(errorResponse);
     }

@@ -1,7 +1,8 @@
-import AppCtrl from './controllers/app';
+import AdminCtrl from './controllers/admin';
 import LoginCtrl from './controllers/login';
 import RegisterCtrl from './controllers/register';
 import UserListCtrl from './controllers/users';
+import StoreListCtrl from './controllers/stores';
 import DashboardCtrl from './controllers/dashboard';
 
 export default function($stateProvider) {
@@ -9,9 +10,9 @@ export default function($stateProvider) {
     .state('admin', {
       url: '/admin',
       abstract: true,
-      templateUrl: '/templates/app.html',
-      controller: AppCtrl,
-      controllerAs: 'appCtrl'
+      templateUrl: '/templates/admin.html',
+      controller: AdminCtrl,
+      controllerAs: 'adminCtrl'
     })
 
     .state('login', {
@@ -37,14 +38,15 @@ export default function($stateProvider) {
 
     .state('admin.users', {
       url: '/users',
-      abstract: true,
-      template: '<ui-view>'
+      templateUrl: '/templates/users.html',
+      controller: UserListCtrl,
+      controllerAs: 'vm'
     })
 
-    .state('admin.users.list', {
-      url: '',
-      templateUrl: '/templates/users/list.html',
-      controller: UserListCtrl,
+    .state('admin.stores', {
+      url: '/stores',
+      templateUrl: '/templates/stores.html',
+      controller: StoreListCtrl,
       controllerAs: 'vm'
     });
 }

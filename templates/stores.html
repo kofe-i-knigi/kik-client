@@ -1,0 +1,52 @@
+<section class="content-header">
+  <h1>
+    Склады
+  </h1>
+</section>
+
+<section class="content">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="box">
+        <table ng-table="vm.tableParams" class="table table-bordered table-hover">
+          <colgroup>
+            <col width="90%" />
+            <col width="10%" />
+          </colgroup>
+          <tr ng-repeat="store in $data">
+            <td data-title="'Название'">
+              <editable-text ng-model="store.name" change="vm.updateEntity(store)" required>
+            </td>
+            <td>
+              <button class="btn btn-xs btn-danger" ng-click="vm.removeEntity(store)">
+                <i class="glyphicon glyphicon-remove"></i>
+              </button>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <button class="btn btn-primary" ng-click="vm.openCreateForm()" ng-hide="vm.createFormOpened">Добавить</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="box" ng-show="vm.createFormOpened">
+        <div class="box-body">
+          <form ng-submit="vm.createEntity()" name="vm.createForm">
+            <div class="form-group">
+              <label>Название</label>
+              <input class="form-control" type="text" ng-model="vm.newEntity.name" required>
+            </div>
+            <button class="btn btn-primary" type="submit">Добавить</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
