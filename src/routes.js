@@ -4,6 +4,7 @@ import RegisterCtrl from './controllers/register';
 import UserListCtrl from './controllers/users';
 import StoreListCtrl from './controllers/stores';
 import DashboardCtrl from './controllers/dashboard';
+import MenuCtrl from './controllers/menu';
 
 export default function($stateProvider) {
   $stateProvider
@@ -47,6 +48,13 @@ export default function($stateProvider) {
       url: '/stores',
       templateUrl: '/templates/stores.html',
       controller: StoreListCtrl,
+      controllerAs: 'vm'
+    })
+
+    .state('menu', {
+      url: '/menu',
+      templateUrl: '/templates/menu.html',
+      controller: MenuCtrl,
       controllerAs: 'vm'
     });
 }

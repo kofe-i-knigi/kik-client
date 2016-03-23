@@ -11,11 +11,15 @@
 
       <nav class="navbar navbar-static-top" role="navigation">
         <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-          <span class="sr-only">Toggle navigation</span>
+          <span class="sr-only">Меню</span>
         </a>
         <div class="navbar-custom-menu">
           <ul class="nav navbar-nav">
-
+            <li class="dropdown messages-menu">
+              <a ui-sref="menu">
+                <i class="fa fa-beer"></i>
+              </a>
+            </li>
           </ul>
         </div>
       </nav>
@@ -25,7 +29,7 @@
 
       <section class="sidebar">
         <ul class="sidebar-menu">
-          <li class="header">HEADER</li>
+          <li class="header">Основное</li>
 
           <li ui-sref-active="active">
             <a ui-sref="admin.dashboard">
