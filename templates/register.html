@@ -1,11 +1,11 @@
 <div class="hold-transition register-page">
   <div class="register-box">
     <div class="register-logo">
-      <a>Кофе и книги</a>
+      Кофе и книги
     </div>
 
     <div class="register-box-body">
-      <p class="login-box-msg">Регистрация</p>
+      <p class="login-box-msg">Регистрация нового сотрудника</p>
       <form ng-submit="vm.register()">
         <div class="form-group has-feedback">
           <input type="text" class="form-control" ng-model="vm.user.name" placeholder="Имя" required>
@@ -28,15 +28,14 @@
           <span class="glyphicon glyphicon-lock form-control-feedback"></span>
         </div>
         <div class="row">
-          <div class="col-xs-8">
-          </div>
           <div class="col-xs-4">
-            <button type="submit" class="btn btn-primary btn-block btn-flat">Зарегистрироваться</button>
+            <a ui-sref="login" class="btn btn-success text-center">Вход</a>
+          </div>
+          <div class="col-xs-8">
+            <button type="submit" class="btn btn-primary btn-flat pull-right">Зарегистрироваться</button>
           </div>
         </div>
       </form>
-
-      <a ui-sref="login" class="text-center">Вход</a>
     </div>
   </div>
 </div>
