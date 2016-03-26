@@ -3,11 +3,19 @@ import LoginCtrl from './controllers/login';
 import RegisterCtrl from './controllers/register';
 import UserListCtrl from './controllers/users';
 import StoreListCtrl from './controllers/stores';
+import ProductListCtrl from './controllers/products';
 import DashboardCtrl from './controllers/dashboard';
 import MenuCtrl from './controllers/menu';
 
 export default function($stateProvider) {
   $stateProvider
+
+    .state('barista', {
+      url: '/',
+      abstract: true,
+      template: '<ui-view>'
+    })
+
     .state('admin', {
       url: '/admin',
       abstract: true,
@@ -51,8 +59,15 @@ export default function($stateProvider) {
       controllerAs: 'vm'
     })
 
-    .state('menu', {
-      url: '/menu',
+    .state('admin.products', {
+      url: '/products',
+      templateUrl: '/templates/products.html',
+      controller: ProductListCtrl,
+      controllerAs: 'vm'
+    })
+
+    .state('barista.menu', {
+      url: '',
       templateUrl: '/templates/menu.html',
       controller: MenuCtrl,
       controllerAs: 'vm'
