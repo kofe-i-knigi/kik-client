@@ -13,7 +13,7 @@ export default class CrudCtrl {
     }, {
       getData(params) {
         return Resource.query(params.url()).$promise.then((data) => {
-          params.total(data.length);
+          params.total(data.$total || data.length);
 
           return data;
         });
