@@ -1,7 +1,13 @@
-export default class MenuCtrl {
-  constructor() {
+import CrudCtrl from './crud';
 
+export default class MenuCtrl extends CrudCtrl {
+ constructor(Product, ngTableParams) {
+   super(Product, ngTableParams);
+    this.states=['a','b'];
+       
+       
   }
+   
 }
 
-MenuCtrl.$inject = [];
+MenuCtrl.$inject = ['Product', 'ngTableParams'];

@@ -1,11 +1,3 @@
-import {API_BASE} from '../config';
+import Resource from './resource';
 
-export default function Product($resource) {
-  return $resource(`${API_BASE}/products/:id`, {}, {
-    update: {
-      method: 'PUT'
-    }
-  });
-}
-
-Product.$inject = ['$resource'];
+export default Resource('products');

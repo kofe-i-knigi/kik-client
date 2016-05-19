@@ -27,27 +27,6 @@
               <label>Себестоимость</label>
               <input class="form-control" type="number" step="0.01" ng-model="vm.newEntity.costPrice">
             </div>
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" ng-click="isIngridient=true">
-                Ингридиент
-              </label>
-            <div class="ingredients" ng-show="isIngridient">
-              <input type="text" ng-model="selected" uib-typeahead="state for state in vm.states | filter:$viewValue | limitTo:8" class="form-control">
-              <button type="submit" ng-click="vm.addIngredient"></button>
-              <table>
-                <tr ng-repeat="state in vm.states track by $index"></tr>
-                <td>
-<!--                   <editable-text ng-model="state" required>
-                </td> -->
-
-                
-
-
-              </table>
-             
-            </div>
-            </div>
             <div class="form-group">
               <label>Единицы</label>
               <input class="form-control" type="text" ng-model="vm.newEntity.unit">
@@ -71,7 +50,7 @@
           </colgroup>
 
           <tr ng-repeat="product in $data">
-            <td data-title="'Название'" filter="{name: 'text'}" >
+            <td data-title="'Название'">
               <editable-text ng-model="product.name"  change="vm.updateEntity(product)" required>
             </td>
             <td data-title="'Себестоимость'">

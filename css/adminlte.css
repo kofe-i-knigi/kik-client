@@ -4743,16 +4743,36 @@ table.text-center th {
 }
 
 .ng-table-counts { display: none !important; }
-.goods .list-goods-box{
+ .list-goods-box{
   margin-top: 20px;
 }
-.goods .fa.fa-times {
+.fa.fa-times {
     color: #D9532E;
     font-size: 23px;
     float: right;
     position: relative;;
     margin-top: -6px
 }
-.goods .ingredients{
+.ingredients{
   margin-top: 7px;
+}
+.menu-ingridients-list{
+  display: none;
+}
+.menu-ingridients-list .show{
+  display: block;
+}
+.menu .dropdown .fa{
+ float: right;
+}
+.menu .dropdown{
+ float: right;
+}
+.menu .menu-ingridients-list .fa{
+  float: right;
+  height: 12px;
+  width: 7px;
+}
+.menu .menu-ingridients-list button{
+  float: right;
 }

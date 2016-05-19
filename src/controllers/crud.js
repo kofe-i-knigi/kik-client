@@ -20,9 +20,8 @@ export default class CrudCtrl {
       }
     });
   }
-
   openCreateForm() {
-    this.createFormOpened = true;
+    this.createFormOpened = true;    
   }
 
   createEntity() {

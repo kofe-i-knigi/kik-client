@@ -65,11 +65,17 @@ export default function($stateProvider) {
       controller: ProductListCtrl,
       controllerAs: 'vm'
     })
-
-    .state('barista.menu', {
-      url: '',
+    .state('admin.menu', {
+      url: '/menu',
       templateUrl: '/templates/menu.html',
       controller: MenuCtrl,
       controllerAs: 'vm'
-    });
+    })
+
+    // .state('barista.menu', {
+    //   url: '',
+    //   templateUrl: '/templates/menu.html',
+    //   controller: MenuCtrl,
+    //   controllerAs: 'vm'
+    // });
 }
