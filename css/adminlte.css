@@ -4753,9 +4753,7 @@ table.text-center th {
     position: relative;;
     margin-top: -6px
 }
-.ingredients{
-  margin-top: 7px;
-}
+
 .menu-ingridients-list{
   display: none;
 }
@@ -4775,4 +4773,10 @@ table.text-center th {
 }
 .menu .menu-ingridients-list button{
   float: right;
+}
+.menu .add-ingridient{
+  width: 100%;
+  margin-top: 10px;
+  text-align: center;
+
 }

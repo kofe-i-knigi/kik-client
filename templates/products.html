@@ -42,10 +42,9 @@
       <div class="box  list-goods-box">
         <table ng-table="vm.tableParams" show-filter="true" class="table table-bordered table-hover">
           <colgroup>
-            <col width="35%">
-            <col width="35%">
-            <col width="10%">
-            <col width="10%">
+            <col width="66%">
+            <col width="12%">
+            <col width="12%">
             <col width="10%">
           </colgroup>
 
@@ -56,9 +55,9 @@
             <td data-title="'Себестоимость'">
               <editable-text ng-model="product.costPrice" change="vm.updateEntity(product)" required>
             </td>
-            <td data-title="'Ингридиент'">
+            <!-- <td data-title="'Ингридиент'">
               <input type="checkbox" ng-model="product.isIngridient" ng-change="vm.updateEntity(product)">
-            </td>
+            </td> -->
             <td data-title="'Единицы'">
               <editable-text ng-model="product.unit" change="vm.updateEntity(product)" required>
             </td>
@@ -66,14 +65,10 @@
               <button class="btn btn-xs btn-danger" ng-click="vm.removeEntity(product)">
                 <i class="glyphicon glyphicon-remove"></i>
               </button>
+            </td>
           </tr>
         </table>
       </div>
     </div>
   </div>
-
-
-
-
-
 </section>
