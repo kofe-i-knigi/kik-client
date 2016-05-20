@@ -27,30 +27,6 @@
               <label>Себестоимость</label>
               <input class="form-control" type="number" step="0.01" ng-model="vm.newEntity.costPrice" min="0">
             </div>
-<<<<<<< HEAD
-=======
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" ng-click="isIngridient=true">
-                Ингридиент
-              </label>
-            <div class="ingredients" ng-show="isIngridient">
-              <input type="text" ng-model="selected" uib-typeahead="state for state in vm.states | filter:$viewValue | limitTo:8" class="form-control">
-              <button type="submit" ng-click="vm.addIngredient"></button>
-              <table>
-                <tr ng-repeat="state in vm.states track by $index"></tr>
-                <td>
-<!--                   <editable-text ng-model="state" required>
-                </td> -->
-
-
-
-
-              </table>
-
-            </div>
-            </div>
->>>>>>> 195e41a968cb56e8f0e2f1482ebb3c54a644351c
             <div class="form-group">
               <label>Единицы</label>
               <input class="form-control" type="text" ng-model="vm.newEntity.unit">
