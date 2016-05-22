@@ -1,7 +1,9 @@
+import {clone} from 'lodash';
+
 export default class CrudCtrl {
   constructor(Resource, ngTableParams) {
     this.Resource = Resource;
-    this.newEntity = new Resource();
+    this.newEntityDefault = new Resource();
     this.filters = {}
     this.tableParams = new ngTableParams({
       page: 1,
@@ -20,16 +22,21 @@ export default class CrudCtrl {
       }
     });
   }
+
   openCreateForm() {
-    this.createFormOpened = true;    
+    this.createFormOpened = true;
   }
 
   createEntity() {
+    if (this.createForm.$invalid) {
+      return;
+    }
+
     this.Resource.save(this.newEntity).$promise
     .then(() => {
       this.tableParams.reload();
       this.createFormOpened = false;
-      this.newEntity = new this.Resource;
+      this.newEntity = clone(this.newEntityDefault);
       this.createForm.$setPristine();
     });
   }

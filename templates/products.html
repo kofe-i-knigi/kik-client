@@ -1,4 +1,4 @@
-<section class="content-header ">
+<section class="content-header">
   <h1>
     Складские единицы
   </h1>
@@ -31,6 +31,12 @@
               <label>Единицы</label>
               <input class="form-control" type="text" ng-model="vm.newEntity.unit">
             </div>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="vm.newEntity.isIngridient">
+                Ингридиент
+              </label>
+            </div>
             <button class="btn btn-primary" type="submit">Добавить</button>
           </form>
         </div>
@@ -42,9 +48,10 @@
       <div class="box list-goods-box">
         <table ng-table="vm.tableParams" class="table table-bordered table-hover">
           <colgroup>
-            <col width="66%">
-            <col width="12%">
-            <col width="12%">
+            <col width="35%">
+            <col width="35%">
+            <col width="10%">
+            <col width="10%">
             <col width="10%">
           </colgroup>
 
@@ -55,9 +62,9 @@
             <td data-title="'Себестоимость'">
               <editable-text ng-model="product.costPrice" change="vm.updateEntity(product)" required>
             </td>
-            <!-- <td data-title="'Ингридиент'">
+            <td data-title="'Ингридиент'">
               <input type="checkbox" ng-model="product.isIngridient" ng-change="vm.updateEntity(product)">
-            </td> -->
+            </td>
             <td data-title="'Единицы'">
               <editable-text ng-model="product.unit" change="vm.updateEntity(product)" required>
             </td>

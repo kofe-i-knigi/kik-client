@@ -4771,12 +4771,17 @@ table.text-center th {
   height: 12px;
   width: 7px;
 }
-.menu .menu-ingridients-list button{
+.menu .menu-ingridients-list button {
   float: right;
 }
-.menu .add-ingridient{
-  width: 100%;
-  margin-top: 10px;
-  text-align: center;
 
+.add-ingridient,
+.remove-ingridient {
+  margin-top: 28px;
+  margin-left: -8px;
+  text-align: center;
+}
+
+a {
+  cursor: pointer;
 }
