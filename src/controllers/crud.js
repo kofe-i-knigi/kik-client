@@ -3,8 +3,8 @@ import {clone} from 'lodash';
 export default class CrudCtrl {
   constructor(Resource, ngTableParams) {
     this.Resource = Resource;
-    this.newEntityDefault = new Resource();
-    this.filters = {}
+    this.newEntityDefault = {};
+    this.filters = {};
     this.tableParams = new ngTableParams({
       page: 1,
       count: 20,

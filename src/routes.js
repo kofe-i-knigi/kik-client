@@ -72,10 +72,9 @@ export default function($stateProvider) {
       controllerAs: 'vm'
     })
 
-    // .state('barista.menu', {
-    //   url: '',
-    //   templateUrl: '/templates/menu.html',
-    //   controller: MenuCtrl,
-    //   controllerAs: 'vm'
-    // });
+    .state('barista.index', {
+      url: '',
+      templateUrl: '/templates/barista.html',
+      controllerAs: 'vm'
+    });
 }

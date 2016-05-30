@@ -4756,7 +4756,15 @@ table.text-center th {
 
 .menu-ingridients-list{
   display: none;
+  list-style: none;
+  padding: 0;
+  margin-top: 5px
 }
+
+.menu-ingridients-list li {
+  margin: 5px 0;
+}
+
 .menu-ingridients-list .show{
   display: block;
 }
@@ -4772,6 +4780,8 @@ table.text-center th {
   width: 7px;
 }
 .menu .menu-ingridients-list button {
+  margin-top: 4px;
+  margin-left: 4px;
   float: right;
 }
 

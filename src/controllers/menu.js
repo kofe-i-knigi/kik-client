@@ -1,10 +1,11 @@
-import {extend, cloneDeep} from 'lodash';
+import {extend, cloneDeep, clone, map} from 'lodash';
 import CrudCtrl from './crud';
 
 export default class MenuCtrl extends CrudCtrl {
   constructor(MenuItem, Product, ngTableParams) {
     super(MenuItem, ngTableParams);
 
+    this.MenuItem = MenuItem;
     this.Product = Product;
 
     extend(this.newEntityDefault, {
@@ -23,10 +24,16 @@ export default class MenuCtrl extends CrudCtrl {
     }).$promise;
   }
 
-  searchIngridientProducts(query) {
+  searchIngridientProducts(query, products) {
+    let idsToExclude;
+    if (products) {
+      idsToExclude = map(products, 'id').join(',');
+    }
+
     return this.Product.query({
       'filter[name]': query,
-      'filter[isIngridient]': true
+      'filter[isIngridient]': true,
+      'filter[exclude]': idsToExclude
     }).$promise;
   }
 
@@ -35,7 +42,7 @@ export default class MenuCtrl extends CrudCtrl {
       return;
     }
 
-    this.newEntity.name = this.newEntity.products[0].name
+    this.newEntity.name = this.newEntity.products[0].name;
   }
 
   addIngridient() {
@@ -46,6 +53,45 @@ export default class MenuCtrl extends CrudCtrl {
     this.newEntity.products.push(this.newIngridient);
 
     delete this.newIngridient;
+  }
+
+  removeIngridient(product) {
+    const index = this.newEntity.products.indexOf(product);
+
+    this.newEntity.products.splice(index, 1);
+  }
+
+  addIngridientExisting(menuItem, newIngridient) {
+    if (!newIngridient || !newIngridient.MenuItemProduct) {
+      return;
+    }
+
+    this.MenuItem.addIngridient({
+      id: menuItem.id
+    }, newIngridient).$promise.then(() => {
+      menuItem.products.push(clone(newIngridient));
+
+      Object.keys(newIngridient).forEach(key => {
+        delete newIngridient[key];
+      });
+    });
+  }
+
+  removeIngridientExisting(menuItem, product) {
+    this.MenuItem.removeIngridient({
+      id: menuItem.id,
+      productId: product.id
+    }).$promise.then(() => {
+      const index = menuItem.products.indexOf(product);
+      menuItem.products.splice(index, 1);
+    });
+  }
+
+  updateIngridientExistsing(menuItem, product) {
+    this.MenuItem.updateIngridient({
+      id: menuItem.id,
+      productId: product.id
+    }, product);
   }
 }
 

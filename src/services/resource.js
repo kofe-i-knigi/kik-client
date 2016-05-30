@@ -1,8 +1,9 @@
+import {extend} from 'lodash';
 import {API_BASE} from '../config';
 
-export default function Resource(name) {
+export default function Resource(name, newActions) {
   return function($resource) {
-    return $resource(`${API_BASE}/${name}/:id`, {}, {
+    const actions = {
       query: {
         isArray: true,
 
@@ -11,7 +12,7 @@ export default function Resource(name) {
             let rangeHeader = response.headers()['content-range'];
 
             if (rangeHeader) {
-              response.resource.$total = +rangeHeader.split('/')[1]
+              response.resource.$total = +rangeHeader.split('/')[1];
             }
 
             return response.resource;
@@ -22,8 +23,14 @@ export default function Resource(name) {
       update: {
         method: 'PUT'
       }
-    });
-  }
+    };
+
+    if (newActions) {
+      extend(actions, newActions);
+    }
+
+    return $resource(`${API_BASE}/${name}/:id`, {}, actions);
+  };
 }
 
 Resource.$inject = ['$resource'];

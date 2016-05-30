@@ -102,13 +102,15 @@
                 <div class="form-group">
                   <label>Количество</label>
                   <div class="input-group">
-                    <input class="form-control" type="text" ng-model="vm.newEntity.products[$index].quantity">
+                    <input class="form-control" type="number" ng-model="vm.newEntity.products[$index].quantity">
                     <span class="input-group-addon">{{product.unit}}</span>
                   </div>
                 </div>
               </div>
               <div class="col-md-1">
-                <button class="btn btn-sm btn-danger remove-ingridient" ng-click="vm.removeEntity(product)">
+                <button type="button"
+                        class="btn btn-sm btn-danger remove-ingridient"
+                        ng-click="vm.removeIngridient(product)">
                   <i class="glyphicon glyphicon-remove"></i>
                 </button>
               </div>
@@ -133,7 +135,7 @@
                 <div class="form-group">
                   <label>Количество</label>
                   <div class="input-group">
-                    <input class="form-control" type="text" ng-model="vm.newIngridient.quantity">
+                    <input class="form-control" type="number" ng-model="vm.newIngridient.quantity">
                     <span class="input-group-addon">{{vm.newIngridient.unit}}</span>
                   </div>
                 </div>
@@ -162,46 +164,75 @@
             <col width="12%">
             <col width="10%">
           </colgroup>
-          <tr ng-repeat="product in $data">
+          <tr ng-repeat="menuItem in $data">
             <td data-title="'Название'" >
               <div class="menu-product-name">
-                <button class="btn btn-xs btn-primary dropdown" ng-if="product.isComposite" ng-click='product.show =
-                !product.show'>
+                <button class="btn btn-xs btn-primary dropdown" ng-if="menuItem.isComposite" ng-click='menuItem.show =
+                !menuItem.show'>
                     <i class="fa fa-caret-down" aria-hidden="true"></i>
                 </button>
-                <editable-text ng-model="product.name"  change="vm.updateEntity(product)" required>
+                <editable-text ng-model="menuItem.name"  change="vm.updateEntity(menuItem)" required>
               </div>
-              <div class="menu-ingridients-list" ng-class='{show: product.show}'>
-               <button class="btn btn-xs btn-warning ">
-                  <i class="fa fa-pencil skin-yellow-light" ></i>
-                </button>
-                <editable-text ng-model="product.name"  change="vm.updateEntity(product)" required>
+              <ul class="menu-ingridients-list form-inline"
+                  ng-class="{show: menuItem.show}">
+                <!-- редактирование добавленных ингридиентов -->
+                <li ng-repeat="product in menuItem.products">
+                  <button class="btn btn-xs btn-danger"
+                          ng-click="vm.removeIngridientExisting(menuItem,product)">
+                    <span class="glyphicon glyphicon-remove"></span>
+                  </button>
+                  <button type="button"
+                          class="btn btn-xs btn-success"
+                          ng-click="vm.updateIngridientExistsing(menuItem,product)">
+                     <span class="glyphicon glyphicon-ok"></span>
+                  </button>
+                  <input type="text"
+                         ng-model="menuItem.products[$index]"
+                         typeahead-editable="false"
+                         uib-typeahead="product as product.name for product in vm.searchIngridientProducts($viewValue)"
+                         class="form-control input-sm" required>
+                  <div class="input-group">
+                    <input type="number" class="form-control input-sm"
+                           ng-model="menuItem.products[$index].MenuItemProduct.quantity" />
+                    <span class="input-group-addon">{{product.unit}}</span>
+                  </div>
+                </li>
 
+                <!-- новый ингридиент -->
+                <li>
+                  <form ng-submit="vm.addIngridientExisting(menuItem,
+                         newIngridient)">
+                    <button class="btn btn-xs btn-success" type="submit">
+                      <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                    <input type="text"
+                           ng-model="newIngridient"
+                           typeahead-editable="false"
+                           uib-typeahead="product as product.name for product in vm.searchIngridientProducts($viewValue,menuItem.products)"
+                           class="form-control input-sm" required>
+                    <div class="input-group">
+                      <input type="number" class="form-control input-sm"
+                             ng-model="newIngridient.MenuItemProduct.quantity"/>
+                      <span class="input-group-addon">{{newIngridient.unit}}</span>
+                    </div>
+                  </form>
+                </li>
               </div>
-            <!--   <editable-text ng-model="product.name"  change="vm.updateEntity(product)" required>
-            </div>
-              <!-- <table class="table table-hover">
-                <tr ng-repeat="product in vm.products">
-                  <td data-title="'Название'">
-                    <editable-text ng-model="product.name"  change="vm.updateEntity(product)" required>
-                  </td>
-                </tr>
-              </table> -->
             </td>
             <td data-title="'Цена'">
-              <editable-text ng-model="product.price" change="vm.updateEntity(product)" required>
+              <editable-text ng-model="menuItem.price" change="vm.updateEntity(menuItem)" required>
             </td>
             <td data-title="'Составной'">
-              <input type="checkbox" ng-model="product.isComposite" disabled>
+              <input type="checkbox" ng-model="menuItem.isComposite" disabled>
             </td>
-            <td data-title="'Себестоимость'">
-              {{product.costPrice || 0}}
+            <td data-title="'Себестоимость, руб.'">
+              {{menuItem.costPrice || 0 | currency:''}}
             </td>
-            <td data-title="'Наценка'">
-              {{product.markup || 0}}
+            <td data-title="'Наценка, руб.'">
+              {{menuItem.price - menuItem.costPrice | currency:''}}
             </td>
             <td>
-              <button class="btn btn-xs btn-danger" ng-click="vm.removeEntity(product)">
+              <button class="btn btn-xs btn-danger" ng-click="vm.removeEntity(menuItem)">
                 <i class="glyphicon glyphicon-remove"></i>
               </button>
           </tr>
@@ -210,19 +241,3 @@
     </div>
   </div>
 </section>
-
-<!-- <div class="hold-transition login-page">
-  <div class="login-box">
-    <div class="login-logo">
-      <a>Меню</a>
-    </div>
-    <div class="login-box-body">
-      <p class="login-box-msg">
-        Тут будет страница меню<br>
-        Выбиралка товаров, отправка чеков,<br>
-        оформление журнала и прочее.
-      </p>
-    </div>
-  </div>
-</div>
- -->
