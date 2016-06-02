@@ -1,0 +1,36 @@
+<section class="content-header">
+  <h1>Остатки</h1>
+</section>
+
+<section class="content">
+  <div class="row">
+    <div class="col-xs-12">
+      <a class="btn btn-primary"
+         ui-sref="admin.stock.createDelivery"
+         >Новая поставка</a>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-6">
+      <div class="box list-goods-box">
+        <table ng-table="vm.tableParams" class="table table-bordered table-hover">
+          <tr ng-repeat="product in $data">
+            <td data-title="'Название'" sortable="'name'">
+              {{::product.name}}
+            </td>
+            <td data-title="'Остаток'" sortable="'quantity'">
+              {{::product.ProductStore.quantity}} {{::product.unit}}
+            </td>
+            <td data-title="'Себестоимость'" sortable="'costPrice'">
+              {{::product.costPrice | currency:''}}
+            </td>
+            <td data-title="'Сумма, руб'" sortable="'totalCostPrice'">
+              {{::product.totalCostPrice | currency:''}}
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>

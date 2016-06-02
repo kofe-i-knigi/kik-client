@@ -1,9 +1,7 @@
-import CrudCtrl from './crud';
-
-export default class StoreListCtrl extends CrudCtrl {
-  constructor(Store, ngTableParams) {
-    super(Store, ngTableParams);
+export default class StoreListCtrl {
+  constructor(Store) {
+    this.stores = Store.query();
   }
 }
 
-StoreListCtrl.$inject = ['Store', 'ngTableParams'];
+StoreListCtrl.$inject = ['Store'];

@@ -33,12 +33,8 @@
                   <label>Название</label>
                   <input type="text" ng-model="vm.newEntity.products[0]" typeahead-editable="false"
                     uib-typeahead="product as product.name for product in vm.searchSimpleProducts($viewValue)"
-                    typeahead-loading="loadingProducts" typeahead-no-results="noResults"
+                    typeahead-min-length="0"
                     class="form-control" typeahead-on-select="vm.updateProductName()" required>
-                  <i ng-show="loadingProducts" class="glyphicon glyphicon-refresh"></i>
-                  <div ng-show="noResults">
-                    <i class="glyphicon glyphicon-remove"></i> Товар не найден
-                  </div>
                 </div>
               </div>
 
@@ -91,6 +87,7 @@
                   <label>Ингридиент</label>
                   <input type="text" ng-model="vm.newEntity.products[$index]" typeahead-editable="false"
                     uib-typeahead="product as product.name for product in vm.searchIngridientProducts($viewValue)"
+                    typeahead-min-length="0"
                     class="form-control" required>
 <!--                   <i ng-show="loadingProducts" class="glyphicon glyphicon-refresh"></i>
                   <div ng-show="noResults">
@@ -124,11 +121,8 @@
                   <input type="text" ng-model="vm.newIngridient" typeahead-editable="false"
                     uib-typeahead="product as product.name for product in vm.searchIngridientProducts($viewValue)"
                     typeahead-loading="loadingProducts" typeahead-no-results="noResults"
+                    typeahead-min-length="0"
                     class="form-control">
-                  <i ng-show="loadingProducts" class="glyphicon glyphicon-refresh"></i>
-                  <div ng-show="noResults">
-                    <i class="glyphicon glyphicon-remove"></i> Товар не найден
-                  </div>
                 </div>
               </div>
               <div class="col-md-4">
@@ -189,6 +183,7 @@
                   <input type="text"
                          ng-model="menuItem.products[$index]"
                          typeahead-editable="false"
+                         typeahead-min-length="0"
                          uib-typeahead="product as product.name for product in vm.searchIngridientProducts($viewValue)"
                          class="form-control input-sm" required>
                   <div class="input-group">
@@ -208,6 +203,7 @@
                     <input type="text"
                            ng-model="newIngridient"
                            typeahead-editable="false"
+                           typeahead-min-length="0"
                            uib-typeahead="product as product.name for product in vm.searchIngridientProducts($viewValue,menuItem.products)"
                            class="form-control input-sm" required>
                     <div class="input-group">
@@ -228,8 +224,8 @@
             <td data-title="'Себестоимость, руб.'">
               {{menuItem.costPrice || 0 | currency:''}}
             </td>
-            <td data-title="'Наценка, руб.'">
-              {{menuItem.price - menuItem.costPrice | currency:''}}
+            <td data-title="'Наценка'">
+              {{(menuItem.price / menuItem.costPrice * 100).toFixed() - 100}}%
             </td>
             <td>
               <button class="btn btn-xs btn-danger" ng-click="vm.removeEntity(menuItem)">

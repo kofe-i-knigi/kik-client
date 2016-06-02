@@ -1,0 +1,92 @@
+<section class="content-header">
+  <h1>Новая поставка</h1>
+</section>
+
+<section class="content">
+  <div class="row">
+    <div class="col-xs-12 col-md-6">
+      <div class="row" ng-repeat="product in vm.newDelivery.products">
+        <div class="col-md-5">
+          <div class="form-group">
+            <label>Название</label>
+            <input type="text"
+                   ng-model="vm.newDelivery.products[$index]"
+                   typeahead-editable="false"
+                   uib-typeahead="product as product.name for product in vm.searchProducts($viewValue)"
+                   typeahead-min-length="0"
+                   class="form-control" required>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label>Количество</label>
+            <div class="input-group">
+              <input class="form-control" type="number"
+                     ng-model="vm.newDelivery.products[$index].quantity">
+              <span class="input-group-addon">{{product.unit}}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="form-group">
+            <label>Цена</label>
+            <div class="input-group">
+              <input class="form-control" type="number"
+                     ng-model="vm.newDelivery.products[$index].newCostPrice">
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-1">
+          <button type="button"
+                  class="btn btn-sm btn-danger remove-ingridient"
+                  ng-click="vm.removeProduct($index)">
+            <i class="glyphicon glyphicon-remove"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- добавление нового ингридиента -->
+      <div class="row">
+        <div class="col-md-5">
+          <div class="form-group">
+            <label>Ингридиент</label>
+            <input type="text" ng-model="vm.newProduct" typeahead-editable="false"
+                   uib-typeahead="product as product.name for product in vm.searchProducts($viewValue)"
+                   typeahead-min-length="0"
+                   class="form-control">
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="form-group">
+            <label>Количество</label>
+            <div class="input-group">
+              <input class="form-control" type="number" ng-model="vm.newProduct.quantity">
+              <span class="input-group-addon">{{vm.newProduct.unit}}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="form-group">
+            <label>Цена</label>
+            <div class="input-group">
+              <input class="form-control" type="number"
+                     ng-model="vm.newProduct.newCostPrice">
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-1">
+          <button type="button" class="btn btn-primary btn-sm add-ingridient"
+                  ng-click="vm.addProduct()">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+      <button class="btn btn-primary" type="submit">Отправить</button>
+    </div>
+  </div>
+</section>
