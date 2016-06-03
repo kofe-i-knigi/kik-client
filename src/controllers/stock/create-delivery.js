@@ -1,9 +1,11 @@
 import {map} from 'lodash';
 
 export default class DeliveryCtrl {
-  constructor(Delivery, Product) {
+  constructor($state, $stateParams, Delivery, Product) {
     this.Delivery = Delivery;
     this.Product = Product;
+    this.$stateParams = $stateParams;
+    this.$state = $state;
 
     this.newDelivery = {
       products: []
@@ -23,7 +25,9 @@ export default class DeliveryCtrl {
   }
 
   addProduct() {
-    if (!(this.newProduct && this.newProduct.quantity)) {
+    if (!(this.newProduct
+          && this.newProduct.quantity
+          && this.newProduct.newCostPrice)) {
       return;
     }
 
@@ -35,6 +39,18 @@ export default class DeliveryCtrl {
   removeProduct(index) {
     this.newDelivery.products.splice(index, 1);
   }
+
+  createDelivery() {
+    if (this.newDelivery.products < 1) {
+      return;
+    }
+
+    this.Delivery.save({
+      storeId: this.$stateParams.storeId
+    }, this.newDelivery).$promise.then(() => {
+      this.$state.go('admin.stock.remains');
+    });
+  }
 }
 
-DeliveryCtrl.$inject = ['Delivery', 'Product'];
+DeliveryCtrl.$inject = ['$state', '$stateParams', 'Delivery', 'Product'];

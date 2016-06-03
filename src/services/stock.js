@@ -1,3 +1,3 @@
 import Resource from './resource';
 
-export default Resource('stock');
+export default Resource('stocks/:storeId');

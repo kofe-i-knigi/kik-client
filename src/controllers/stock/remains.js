@@ -1,5 +1,7 @@
+import {extend} from 'lodash';
+
 export default class RemainsCtrl {
-  constructor(Stock, ngTableParams) {
+  constructor($stateParams, Stock, ngTableParams) {
     this.filters = {};
     this.tableParams = new ngTableParams({
       page: 1,
@@ -10,7 +12,11 @@ export default class RemainsCtrl {
       filterDelay: 1000
     }, {
       getData(params) {
-        return Stock.query(params.url()).$promise.then((data) => {
+        const query = extend(params.url(), {
+          storeId: $stateParams.storeId
+        });
+
+        return Stock.query(query).$promise.then((data) => {
           params.total(data.$total || data.length);
 
           return data;
@@ -19,3 +25,5 @@ export default class RemainsCtrl {
     });
   }
 }
+
+RemainsCtrl.$inject = ['$stateParams', 'Stock', 'ngTableParams'];

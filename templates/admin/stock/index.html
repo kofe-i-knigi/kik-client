@@ -20,12 +20,12 @@
               {{::product.name}}
             </td>
             <td data-title="'Остаток'" sortable="'quantity'">
-              {{::product.ProductStore.quantity}} {{::product.unit}}
+              {{::product.stock[0].quantity || 0}} {{::product.unit}}
             </td>
-            <td data-title="'Себестоимость'" sortable="'costPrice'">
+            <td data-title="'Себестоимость, руб.'" sortable="'costPrice'">
               {{::product.costPrice | currency:''}}
             </td>
-            <td data-title="'Сумма, руб'" sortable="'totalCostPrice'">
+            <td data-title="'Сумма, руб.'" sortable="'totalCostPrice'">
               {{::product.totalCostPrice | currency:''}}
             </td>
           </tr>
