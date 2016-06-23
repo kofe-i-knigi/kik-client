@@ -8,6 +8,7 @@ import StoreListCtrl from './controllers/stores';
 import StockCtrl from './controllers/stock/remains';
 import DeliveryCreateCtrl from './controllers/stock/create-delivery';
 import DashboardCtrl from './controllers/dashboard';
+import BaristaCtrl from './controllers/barista'
 
 export default function($stateProvider) {
   $stateProvider
@@ -15,7 +16,9 @@ export default function($stateProvider) {
     .state('barista', {
       url: '/',
       abstract: true,
-      template: '<ui-view>'
+      template: '<ui-view>',
+      controller: BaristaCtrl,
+      controllerAs: 'vm'
     })
 
     .state('admin', {

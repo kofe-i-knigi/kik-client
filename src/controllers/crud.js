@@ -1,11 +1,11 @@
 import {clone} from 'lodash';
 
 export default class CrudCtrl {
-  constructor(Resource, ngTableParams) {
+  constructor(Resource, NgTableParams) {
     this.Resource = Resource;
     this.newEntityDefault = {};
     this.filters = {};
-    this.tableParams = new ngTableParams({
+    this.tableParams = new NgTableParams({
       page: 1,
       count: 20,
       sorting: {},

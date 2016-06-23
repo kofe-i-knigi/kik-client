@@ -1,9 +1,9 @@
 import {extend} from 'lodash';
 
 export default class RemainsCtrl {
-  constructor($stateParams, Stock, ngTableParams) {
+  constructor($stateParams, Stock, NgTableParams) {
     this.filters = {};
-    this.tableParams = new ngTableParams({
+    this.tableParams = new NgTableParams({
       page: 1,
       count: 20,
       sorting: {},
@@ -26,4 +26,4 @@ export default class RemainsCtrl {
   }
 }
 
-RemainsCtrl.$inject = ['$stateParams', 'Stock', 'ngTableParams'];
+RemainsCtrl.$inject = ['$stateParams', 'Stock', 'NgTableParams'];

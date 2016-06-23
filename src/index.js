@@ -3,8 +3,7 @@ import routes from './routes';
 import uiRouter from 'angular-ui-router';
 import angularJwt from 'angular-jwt';
 import typeahead from 'angular-ui-bootstrap/src/typeahead';
-require('ng-table');
-
+require('ng-table/dist/ng-table');
 import services from './services';
 import directives from './directives';
 

@@ -1,8 +1,8 @@
 export default class UsersListCtrl {
-  constructor(User, ngTableParams) {
+  constructor(User, NgTableParams) {
     const vm = this;
 
-    vm.tableParams = new ngTableParams({
+    vm.tableParams = new NgTableParams({
       page: 1,
       count: 20,
       sorting: {},
@@ -20,4 +20,4 @@ export default class UsersListCtrl {
   }
 }
 
-UsersListCtrl.$inject = ['User', 'ngTableParams'];
+UsersListCtrl.$inject = ['User', 'NgTableParams'];

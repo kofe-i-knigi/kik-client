@@ -2,8 +2,8 @@ import {extend, cloneDeep, clone, map} from 'lodash';
 import CrudCtrl from './crud';
 
 export default class MenuCtrl extends CrudCtrl {
-  constructor(MenuItem, Product, ngTableParams) {
-    super(MenuItem, ngTableParams);
+  constructor(MenuItem, Product, NgTableParams) {
+    super(MenuItem, NgTableParams);
 
     this.MenuItem = MenuItem;
     this.Product = Product;
@@ -95,4 +95,4 @@ export default class MenuCtrl extends CrudCtrl {
   }
 }
 
-MenuCtrl.$inject = ['MenuItem', 'Product', 'ngTableParams'];
+MenuCtrl.$inject = ['MenuItem', 'Product', 'NgTableParams'];

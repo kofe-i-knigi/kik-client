@@ -1,10 +1,10 @@
 import CrudCtrl from './crud';
 
 export default class ProductListCtrl extends CrudCtrl {
-  constructor(Product, ngTableParams) {
-    super(Product, ngTableParams);
+  constructor(Product, NgTableParams) {
+    super(Product, NgTableParams);
 
   }
 }
 
-ProductListCtrl.$inject = ['Product', 'ngTableParams'];
+ProductListCtrl.$inject = ['Product', 'NgTableParams'];
