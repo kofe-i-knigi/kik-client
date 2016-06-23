@@ -3,6 +3,7 @@ import routes from './routes';
 import uiRouter from 'angular-ui-router';
 import angularJwt from 'angular-jwt';
 import typeahead from 'angular-ui-bootstrap/src/typeahead';
+import tabs from 'angular-ui-bootstrap/src/tabs';
 require('ng-table/dist/ng-table');
 import services from './services';
 import directives from './directives';
@@ -11,6 +12,7 @@ angular.module('KIK', [
   uiRouter,
   angularJwt,
   typeahead,
+  tabs,
   'ngTable',
   services,
   directives

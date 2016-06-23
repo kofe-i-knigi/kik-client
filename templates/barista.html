@@ -1,14 +1,415 @@
-<div class="hold-transition login-page">
-  <div class="login-box">
-    <div class="login-logo">
-      <a>Меню</a>
+<div id="barista-menu" class="container">
+    <div class="header">Кофе и книги
+       <br>Родник ( Труда 203/3 )</div>
+    <!-- START row-->
+    <div class="row">
+       <div class="col-md-3">
+          <div class="panel widget hidden-xs">
+             <div class="row row-table">
+                <div class="col-xs-12">
+                  <div class="info-box bg-green">
+                    <span class="info-box-icon">
+                      <i class="fa fa-clock-o"></i>
+                    </span>
+
+                    <div class="info-box-content">
+                      <span class="info-box-text">Время</span>
+                      <span class="info-box-number">20:40</span>
+
+                      <div class="progress">
+                        <div class="progress-bar" style="width: 70%"></div>
+                      </div>
+                          <span class="progress-description">
+                            70% смены
+                          </span>
+                    </div>
+                    <!-- /.info-box-content -->
+                  </div>
+                </div>
+             </div>
+          </div>
+          <div id="checkout" class="panel panel-success positions">
+             <div class="panel-heading">Текущий чек</div>
+             <div class="panel-body"></div>
+             <div class="panel-footer">
+                <div class="row">
+                   <div class="col-xs-5">Наличные</div>
+                   <div class="col-xs-7">
+                      <div class="input-group m-b">
+                         <input id="nal" type="text" class="form-control">
+                         <span class="input-group-addon">₽</span>
+                      </div>
+                   </div>
+                </div>
+                <div class="clearfix">Итого
+                   <div class="pull-right">
+                      <div id="amount">0 ₽</div>
+                   </div>
+                </div>
+                <div id="residue" style="display:none" class="clearfix">Сдача
+                   <div class="pull-right">
+                      <div class="residue">0 ₽</div>
+                   </div>
+                </div>
+                <button type="submit" disabled="" class="btn-lg btn btn-danger">Оплатить счет</button>
+             </div>
+          </div>
+       </div>
+       <div class="col-md-9">
+
+          <uib-tabset active="active" class="positions" >
+
+            <uib-tab index="0" heading="Из системы">
+              <div class="bordered clearfix">
+                <div class="col-xs-12">
+                  <div ng-repeat="menuItem in $data">
+                    <div data-title="'Название'" >
+                      <div class="menu-product-name">
+                        {{menuItem.name}}
+                      </div>
+                    </div>
+                    <div data-title="'Цена'">
+                      {{menuItem.Price}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </uib-tab>
+
+            <uib-tab index="1" heading="Основное меню">
+             
+              <div class="bordered clearfix">
+                <div class="col-md-8 col-xs-12">
+                  <div class="row">
+                     <div class="col-xs-12">
+                        <button type="button" data-price="20" data-composition="sirop" class="btn-lg btn btn-danger">Сироп</button>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-xs-6 col-md-6">
+                        <button type="button" data-price="70" data-composition="espresso" class="btn-sm btn btn-espresso">Эспрессо</button>
+                     </div>
+                     <div class="col-xs-6 col-md-6">
+                        <button type="button" data-price="100" data-composition="espresso, espresso" class="btn-sm btn btn-espresso">Эспрессо (ср)</button>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-xs-6 col-md-6">
+                        <button type="button" data-price="80" data-composition="espresso, water" class="btn-sm btn btn-american">Американо</button>
+                     </div>
+                     <div class="col-xs-6 col-md-6">
+                        <button type="button" data-price="110" data-composition="espresso, espresso, water, halfwater" class="btn-sm btn btn-american">Американо (ср)</button>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-xs-6 col-md-4">
+                        <button type="button" data-price="80" data-composition="espresso, milk" class="btn-lg btn btn-cappuccino">Капучино (мал)</button>
+                     </div>
+                     <div class="col-xs-6 col-md-4">
+                        <button type="button" data-price="110" data-composition="espresso, espresso, milk, halfmilk" class="btn-lg btn btn-cappuccino">Капучино (ср)</button>
+                     </div>
+                     <div class="col-xs-12 col-md-4">
+                        <button type="button" data-price="130" data-composition="espresso, espresso, milk, halfmilk" class="btn-lg btn btn-cappuccino">Капучино (б)</button>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-xs-6 col-md-6">
+                        <button type="button" data-price="100" data-composition="espresso, milk, halfmilk" class="btn-sm btn btn-latte">Латтэ (ср)</button>
+                     </div>
+                     <div class="col-xs-6 col-md-6">
+                        <button type="button" data-price="130" data-composition="espresso, espresso, milk, halfmilk" class="btn-sm btn btn-latte">Латтэ (б)</button>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-xs-6 col-md-6">
+                        <button type="button" data-price="130" data-composition="espresso, milk, halfmilk, sirop" class="btn-sm btn btn-mokachino">Мокачино (ср)</button>
+                     </div>
+                     <div class="col-xs-6 col-md-6">
+                        <button type="button" data-price="150" data-composition="espresso, expresso, milk, halfmilk, sirop" class="btn-sm btn btn-mokachino">Мокачино (б)</button>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-xs-12">
+                        <button type="button" data-price="170" data-composition="espresso, espresso, milk, halfmilk, sirop, sirop" class="btn-sm btn btn-success">Кофе-бариста</button>
+                     </div>
+                  </div>
+                </div>
+                <div class="col-md-4 col-xs-12">
+                  <div class="row">
+                     <div class="col-xs-12">
+                        <button type="button" data-price="50" data-composition="tea" class="btn-lg btn btn-purple">Чай</button>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-xs-6">
+                        <button type="button" data-price="130" data-composition="choco" class="btn-sm btn btn-success">Шоколад</button>
+                     </div>
+                     <div class="col-xs-6">
+                        <button type="button" data-price="100" data-composition="kakao" class="btn-sm btn btn-success">Какао</button>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-xs-6">
+                        <button type="button" data-price="130" data-composition="espresso, milk, halfmilk, sirop, sirop" class="btn-sm btn btn-raff">Раф (ср)</button>
+                     </div>
+                     <div class="col-xs-6">
+                        <button type="button" data-price="160" data-composition="espresso, espresso, milk, halfmilk, sirop, sirop" class="btn-sm btn btn-raff">Раф (б)</button>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-xs-12">
+                        <button type="button" data-price="130" data-composition="espresso, espresso, icecream" class="btn-sm btn btn-glasse">Гляссе</button>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-xs-6">
+                        <button type="button" data-price="20" data-composition="cream" class="btn-sm btn btn-success">Сливки</button>
+                     </div>
+                     <div class="col-xs-6">
+                        <button type="button" data-price="20" data-composition="marshmallow" class="btn-sm btn btn-success">Зефирки</button>
+                     </div>
+                     <div class="col-xs-6">
+                        <button type="button" data-price="20" data-composition="fruit-jelly" class="btn-sm btn btn-success">Мармелад</button>
+                     </div>
+                     <div class="col-xs-6">
+                        <button type="button" data-price="20" data-composition="topping" class="btn-sm btn btn-success">Посыпки</button>
+                     </div>
+                  </div>
+                </div>
+              </div>
+
+            </uib-tab>
+
+            <uib-tab index="$index + 1" ng-repeat="tab in tabs" heading="{{tab.title}}" disable="tab.disabled">
+              {{tab.content}}
+            </uib-tab>
+
+          </uib-tabset>
+
+          <div class="nav-tabs" style="display:none">
+             <!-- Nav tabs-->
+             <ul class="nav nav-tabs">
+                <li class="active">
+                  <a href="#main" data-toggle="tab" aria-expanded="true"></a>
+                </li>
+                <li>
+                  <a href="#showcase" data-toggle="tab" aria-expanded="false">Витрина</a>
+                </li>
+                <li>
+                  <a href="#bar" data-toggle="tab" aria-expanded="false">Барная стойка</a>
+                </li>
+                <li>
+                  <a href="#refrigirator" data-toggle="tab" aria-expanded="false">Газ-вода</a>
+                </li>
+                <li>
+                  <a href="#icecream" data-toggle="tab" aria-expanded="false">Морожки</a>
+                </li>
+                <li>
+                  <a href="#other" data-toggle="tab" aria-expanded="false">Прочее</a>
+                </li>
+             </ul>
+             <!-- Tab panes-->
+             <div id="cafe-menu" class="tab-content positions">
+                <div id="main" class="clearfix tab-pane active">
+                   <div class="col-md-8 col-xs-12">
+                      <div class="row">
+                         <div class="col-xs-12">
+                            <button type="button" data-price="20" data-composition="sirop" class="btn-lg btn btn-danger">Сироп</button>
+                         </div>
+                      </div>
+                      <div class="row">
+                         <div class="col-xs-6 col-md-6">
+                            <button type="button" data-price="70" data-composition="espresso" class="btn-sm btn btn-espresso">Эспрессо</button>
+                         </div>
+                         <div class="col-xs-6 col-md-6">
+                            <button type="button" data-price="100" data-composition="espresso, espresso" class="btn-sm btn btn-espresso">Эспрессо (ср)</button>
+                         </div>
+                      </div>
+                      <div class="row">
+                         <div class="col-xs-6 col-md-6">
+                            <button type="button" data-price="80" data-composition="espresso, water" class="btn-sm btn btn-american">Американо</button>
+                         </div>
+                         <div class="col-xs-6 col-md-6">
+                            <button type="button" data-price="110" data-composition="espresso, espresso, water, halfwater" class="btn-sm btn btn-american">Американо (ср)</button>
+                         </div>
+                      </div>
+                      <div class="row">
+                         <div class="col-xs-6 col-md-4">
+                            <button type="button" data-price="80" data-composition="espresso, milk" class="btn-lg btn btn-cappuccino">Капучино (мал)</button>
+                         </div>
+                         <div class="col-xs-6 col-md-4">
+                            <button type="button" data-price="110" data-composition="espresso, espresso, milk, halfmilk" class="btn-lg btn btn-cappuccino">Капучино (ср)</button>
+                         </div>
+                         <div class="col-xs-12 col-md-4">
+                            <button type="button" data-price="130" data-composition="espresso, espresso, milk, halfmilk" class="btn-lg btn btn-cappuccino">Капучино (б)</button>
+                         </div>
+                      </div>
+                      <div class="row">
+                         <div class="col-xs-6 col-md-6">
+                            <button type="button" data-price="100" data-composition="espresso, milk, halfmilk" class="btn-sm btn btn-latte">Латтэ (ср)</button>
+                         </div>
+                         <div class="col-xs-6 col-md-6">
+                            <button type="button" data-price="130" data-composition="espresso, espresso, milk, halfmilk" class="btn-sm btn btn-latte">Латтэ (б)</button>
+                         </div>
+                      </div>
+                      <div class="row">
+                         <div class="col-xs-6 col-md-6">
+                            <button type="button" data-price="130" data-composition="espresso, milk, halfmilk, sirop" class="btn-sm btn btn-mokachino">Мокачино (ср)</button>
+                         </div>
+                         <div class="col-xs-6 col-md-6">
+                            <button type="button" data-price="150" data-composition="espresso, expresso, milk, halfmilk, sirop" class="btn-sm btn btn-mokachino">Мокачино (б)</button>
+                         </div>
+                      </div>
+                      <div class="row">
+                         <div class="col-xs-12">
+                            <button type="button" data-price="170" data-composition="espresso, espresso, milk, halfmilk, sirop, sirop" class="btn-sm btn btn-success">Кофе-бариста</button>
+                         </div>
+                      </div>
+                   </div>
+                   <div class="col-md-4 col-xs-12">
+                      <div class="row">
+                         <div class="col-xs-12">
+                            <button type="button" data-price="50" data-composition="tea" class="btn-lg btn btn-purple">Чай</button>
+                         </div>
+                      </div>
+                      <div class="row">
+                         <div class="col-xs-6">
+                            <button type="button" data-price="130" data-composition="choco" class="btn-sm btn btn-success">Шоколад</button>
+                         </div>
+                         <div class="col-xs-6">
+                            <button type="button" data-price="100" data-composition="kakao" class="btn-sm btn btn-success">Какао</button>
+                         </div>
+                      </div>
+                      <div class="row">
+                         <div class="col-xs-6">
+                            <button type="button" data-price="130" data-composition="espresso, milk, halfmilk, sirop, sirop" class="btn-sm btn btn-raff">Раф (ср)</button>
+                         </div>
+                         <div class="col-xs-6">
+                            <button type="button" data-price="160" data-composition="espresso, espresso, milk, halfmilk, sirop, sirop" class="btn-sm btn btn-raff">Раф (б)</button>
+                         </div>
+                      </div>
+                      <div class="row">
+                         <div class="col-xs-12">
+                            <button type="button" data-price="130" data-composition="espresso, espresso, icecream" class="btn-sm btn btn-glasse">Гляссе</button>
+                         </div>
+                      </div>
+                      <div class="row">
+                         <div class="col-xs-6">
+                            <button type="button" data-price="20" data-composition="cream" class="btn-sm btn btn-success">Сливки</button>
+                         </div>
+                         <div class="col-xs-6">
+                            <button type="button" data-price="20" data-composition="marshmallow" class="btn-sm btn btn-success">Зефирки</button>
+                         </div>
+                         <div class="col-xs-6">
+                            <button type="button" data-price="20" data-composition="fruit-jelly" class="btn-sm btn btn-success">Мармелад</button>
+                         </div>
+                         <div class="col-xs-6">
+                            <button type="button" data-price="20" data-composition="topping" class="btn-sm btn btn-success">Посыпки</button>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+                <div id="showcase" class="clearfix tab-pane">
+                   <div class="col-md-12 col-xs-12">
+                      <div class="col-xs-6 col-md-6">
+                         <button type="button" data-price="130" data-composition="pie" class="btn-sm btn btn-success">Пай</button>
+                      </div>
+                      <div class="col-xs-6 col-md-6">
+                         <button type="button" data-price="150" data-composition="pie" class="btn-sm btn btn-success">Чизкейк</button>
+                      </div>
+                      <div class="col-xs-6 col-md-6">
+                         <button type="button" data-price="90" data-composition="meatpie" class="btn-sm btn btn-success">Пирог</button>
+                      </div>
+                      <div class="col-xs-6 col-md-6">
+                         <button type="button" data-price="100" data-composition="sandwich" class="btn-sm btn btn-success">Сендвич</button>
+                      </div>
+                      <div class="col-xs-6 col-md-6">
+                         <button type="button" data-price="50" data-composition="side-dish" class="btn-sm btn btn-success">Салат</button>
+                      </div>
+                      <div class="col-xs-6 col-md-6">
+                         <button type="button" data-price="30" data-composition="raffaello" class="btn-sm btn btn-success">Рафаэлка</button>
+                      </div>
+                   </div>
+                </div>
+                <div id="bar" class="clearfix tab-pane">
+                   <div class="col-md-12 col-xs-12">
+                      <div class="col-xs-12 col-md-6">
+                         <button type="button" data-price="30" data-composition="cookie" class="btn-sm btn btn-success">Печенка</button>
+                      </div>
+                      <div class="col-xs-12 col-md-6">
+                         <button type="button" data-price="15" data-composition="" class="btn-sm btn btn-success">Конфетка с миндалем</button>
+                      </div>
+                      <div class="col-xs-12 col-md-6">
+                         <button type="button" data-price="10" data-composition="small-choco" class="btn-sm btn btn-success">Маленькая шоколадка</button>
+                      </div>
+                      <div class="col-xs-12 col-md-6">
+                         <button type="button" data-price="40" data-composition="middle-choco" class="btn-sm btn btn-success">Средняя шоколадка</button>
+                      </div>
+                      <div class="col-xs-12 col-md-6">
+                         <button type="button" data-price="50" data-composition="big-choco" class="btn-sm btn btn-success">Большая шоколадка</button>
+                      </div>
+                      <div class="col-xs-12 col-md-6">
+                         <button type="button" data-price="55" data-composition="m-and-m" class="btn-sm btn btn-success">M&amp;M</button>
+                      </div>
+                   </div>
+                </div>
+                <div id="refrigirator" class="clearfix tab-pane">
+                   <div class="col-md-12 col-xs-12">
+                      <div class="col-xs-4 col-md-4">
+                         <button type="button" data-price="45" data-composition="cola03" class="btn-lg btn btn-cola">Cola 0.33</button>
+                      </div>
+                      <div class="col-xs-4 col-md-4">
+                         <button type="button" data-price="60" data-composition="cola05" class="btn-lg btn btn-cola">Cola 0.5</button>
+                      </div>
+                      <div class="col-xs-4 col-md-4">
+                         <button type="button" data-price="80" data-composition="cola1" class="btn-lg btn btn-cola">Cola 1.0</button>
+                      </div>
+                      <div class="col-xs-4 col-md-4">
+                         <button type="button" data-price="45" data-composition="fanta03" class="btn-lg btn btn-fanta">Fanta 0.33</button>
+                      </div>
+                      <div class="col-xs-4 col-md-4">
+                         <button type="button" data-price="60" data-composition="fanta05" class="btn-lg btn btn-fanta">Fanta 0.5</button>
+                      </div>
+                      <div class="col-xs-4 col-md-4">
+                         <button type="button" data-price="80" data-composition="fanta1" class="btn-lg btn btn-fanta">Fanta 1.0</button>
+                      </div>
+                      <div class="col-xs-4 col-md-4">
+                         <button type="button" data-price="45" data-composition="sprite03" class="btn-lg btn btn-sprite">Sprite 0.33</button>
+                      </div>
+                      <div class="col-xs-4 col-md-4">
+                         <button type="button" data-price="60" data-composition="sprite05" class="btn-lg btn btn-sprite">Sprite 0.5</button>
+                      </div>
+                      <div class="col-xs-4 col-md-4">
+                         <button type="button" data-price="80" data-composition="sprite1" class="btn-lg btn btn-sprite">Sprite 1.0</button>
+                      </div>
+                      <div class="col-xs-4 col-md-4 col-xs-offset-4">
+                         <button type="button" data-price="50" data-composition="sprite05" class="btn-lg btn btn-bonaqua">Bonaqua 0.5</button>
+                      </div>
+                      <div class="col-xs-4 col-md-4">
+                         <button type="button" data-price="60" data-composition="sprite1" class="btn-lg btn btn-bonaqua">Bonaqua 1.0</button>
+                      </div>
+                   </div>
+                </div>
+                <div id="icecream" class="clearfix tab-pane">
+                   <div class="col-md-12 col-xs-12">
+                      <div class="col-xs-6 col-md-6">
+                         <button type="button" data-price="40" data-composition="icecream" class="btn-sm btn btn-success">Дешманские</button>
+                      </div>
+                      <div class="col-xs-6 col-md-6">
+                         <button type="button" data-price="65" data-composition="icecream-rich" class="btn-sm btn btn-success">Дорогие</button>
+                      </div>
+                   </div>
+                </div>
+                <div id="other" class="clearfix tab-pane">
+                   <div class="col-md-12 col-xs-12">
+                      <div class="col-xs-6 col-md-6">
+                         <button type="button" data-price="10" data-composition="" class="btn-sm btn btn-success">Что-то еще за чирку</button>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
     </div>
-    <div class="login-box-body">
-      <p class="login-box-msg">
-        Тут будет страница меню<br>
-        Выбиралка товаров, отправка чеков,<br>
-        оформление журнала и прочее.
-      </p>
-    </div>
-  </div>
-</div>
+    <!-- END row-->
+ </div>
