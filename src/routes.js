@@ -8,7 +8,8 @@ import StoreListCtrl from './controllers/stores';
 import StockCtrl from './controllers/stock/remains';
 import DeliveryCreateCtrl from './controllers/stock/create-delivery';
 import DashboardCtrl from './controllers/dashboard';
-import BaristaCtrl from './controllers/barista'
+import CashboxCtrl from './controllers/barista/cashbox';
+import BaristaMenuCtrl from './controllers/barista/menu';
 
 export default function($stateProvider) {
   $stateProvider
@@ -16,8 +17,27 @@ export default function($stateProvider) {
     .state('barista', {
       url: '/',
       abstract: true,
-      template: '<ui-view>',
-      controller: BaristaCtrl,
+      template: '<ui-view>'
+    })
+
+    .state('barista.cashbox', {
+      url: '',
+      abstract: true,
+      templateUrl: '/templates/barista/index.html',
+      controller: CashboxCtrl,
+      controllerAs: 'cashbox'
+    })
+
+    .state('barista.cashbox.menu', {
+      url: '',
+      templateUrl: '/templates/barista/menu.html',
+      controller: BaristaMenuCtrl,
+      controllerAs: 'vm'
+    })
+
+    .state('barista.cashbox.preview', {
+      url: 'preview',
+      templateUrl: '/templates/barista/preview.html',
       controllerAs: 'vm'
     })
 
@@ -95,12 +115,6 @@ export default function($stateProvider) {
       url: '/menuitems',
       templateUrl: '/templates/admin/menu-items.html',
       controller: MenuItemCtrl,
-      controllerAs: 'vm'
-    })
-
-    .state('barista.index', {
-      url: '',
-      templateUrl: '/templates/barista.html',
       controllerAs: 'vm'
     });
 }

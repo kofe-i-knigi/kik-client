@@ -5,6 +5,8 @@ import angularJwt from 'angular-jwt';
 import typeahead from 'angular-ui-bootstrap/src/typeahead';
 import tabs from 'angular-ui-bootstrap/src/tabs';
 require('ng-table/dist/ng-table');
+require('angular-i18n/angular-locale_ru.js');
+
 import services from './services';
 import directives from './directives';
 
@@ -29,7 +31,7 @@ angular.module('KIK', [
   $httpProvider.interceptors.push('apiErrorHandler');
 })
 
-.config(['$stateProvider', routes])
+.config(['$stateProvider', routes]);
 
 angular.element(document).ready(() => {
   angular.bootstrap(document, ['KIK']);

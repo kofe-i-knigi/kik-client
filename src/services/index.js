@@ -10,6 +10,9 @@ import Product from './product';
 import MenuItem from './menu-item';
 import apiErrorHanler from './api-error-handler';
 
+import apiCached from './api-cached';
+import Receipt from './receipt';
+
 angular.module('app.services', [ngResource])
 .service('Auth', Auth)
 .service('User', User)
@@ -18,6 +21,8 @@ angular.module('app.services', [ngResource])
 .service('Delivery', Delivery)
 .service('Product', Product)
 .service('MenuItem', MenuItem)
+.service('apiCached', apiCached)
+.service('Receipt', Receipt)
 .service('apiErrorHandler', apiErrorHanler);
 
 export default 'app.services';
