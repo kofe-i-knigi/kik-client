@@ -4832,12 +4832,45 @@ body {
 #checkout .panel-footer .input-group-addon {
   padding: 6px 10px;
 }
+#checkout .panel-footer .btn {
+  margin-top: 20px;
+}
+#checkout .btn-group {
+  margin:0 auto 20px;
+}
+#checkout .form-control {
+  text-align: right;
+  background-color: rgba(255,255,255,.5);
+}
+#checkout .input-group-addon,
+#checkout .form-control[disabled] {
+  background-color: transparent;
+  border-color: transparent;
+}
+#checkout .form-control[disabled] {
+  padding-right: 0;
+}
+#checkout .btn-group>.btn {
+  padding:5px 6.5px;
+}
+#checkout .btn-group>.btn:first-child:not(:last-child) {
+  
+}
+#checkout .btn-group>.btn:last-child:not(:first-child) {
+
+}
+
 
 .positions .btn, 
 .positions .ColVis .ColVis_Button, .ColVis .positions .ColVis_Button {
   width: 100%;
   margin: 10px 0;
   padding: 10px 5px;
+}
+
+.positions .small-price {
+  font-size: 12px;
+  opacity: .8;
 }
 
 .main-nav li {
@@ -4857,6 +4890,12 @@ body {
 }
 
 /* Custom buttons */
+
+.btn-transparent {
+  color:black;
+  background-color: transparent;
+  border-color: transparent;
+}
 
 .btn-espresso {
   color: #fff;
