@@ -42,6 +42,7 @@
               <div class="list-group-item clearfix"
                    ng-repeat="item in cashbox.receipt.items track by $index">
                 <span>{{::item.name}}</span>
+                <span ng-if="(item.quantity > 1)"> (x{{item.quantity}})</span>
                 <span class="pull-right">
                   <button class="btn btn-transparent btn-xs"
                           ng-click="cashbox.removeItem($index)">
@@ -54,20 +55,17 @@
                 <div class="row">
                   <div class="col-xs-12 text-center">
                     <div class="btn-group">
-                      <button class="btn-sm btn btn-default active" type="button">Нал.</button>
-                      <button class="btn-sm btn btn-default" type="button">Безнал.</button>
-                      <button class="btn-sm btn btn-default" type="button">За свой счет</button>
+                      <label class="btn-sm btn btn-default"
+                              type="button" ng-model="cashbox.receipt.type"
+                              uib-btn-radio="'cash'">Нал.</label>
+                      <label class="btn-sm btn btn-default"
+                              type="button" ng-model="cashbox.receipt.type"
+                              uib-btn-radio="'card'">Безнал.</label>
+                      <label class="btn-sm btn btn-default"
+                              type="button" ng-model="cashbox.receipt.type"
+                              uib-btn-radio="'free'">За свой счет</label>
                     </div>
                   </div>
-                </div>
-                <div class="row">
-                   <div class="col-xs-5">Наличные</div>
-                   <div class="col-xs-7">
-                      <div class="input-group m-b">
-                         <input id="nal" type="text" class="form-control">
-                         <span class="input-group-addon">р.</span>
-                      </div>
-                   </div>
                 </div>
                 <div class="row">
                    <div class="col-xs-5">Итого</div>
@@ -78,11 +76,26 @@
                       </div>
                    </div>
                 </div>
-                <div class="row">
+                <div class="row" ng-show="cashbox.receipt.type=='cash'">
+                   <div class="col-xs-5">Наличные</div>
+                   <div class="col-xs-7">
+                      <div class="input-group m-b">
+                         <input id="nal" type="number"
+                                class="form-control"
+                                step="0.01" min="0"
+                                ng-model="cashbox.receipt.cash"
+                                ng-change="cashbox.recalc()">
+                         <span class="input-group-addon">р.</span>
+                      </div>
+                   </div>
+                </div>
+
+                <div class="row" ng-show="cashbox.receipt.type=='cash'">
                    <div class="col-xs-5">Сдача</div>
                    <div class="col-xs-7">
                       <div class="input-group m-b disabled">
-                         <input type="text" class="form-control" value="Степа добавь" disabled>
+                         <span class="form-control" disabled
+                               >{{cashbox.receipt.change}}</span>
                          <span class="input-group-addon">р.</span>
                       </div>
                    </div>
@@ -142,47 +155,24 @@
                   </tr>
                   </thead>
                   <tbody>
-                  <tr>
-                    <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                    <td>Купучино (м), Латте (б), Сироп (шоколад), Сироп (банан)</td>
-                    <td><span class="label label-success">Безнал.</span></td>
-                    <td>400 руб.</td>
-                  </tr>
-                  <tr>
-                    <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                    <td>Купучино (м), Мокачино (ср), Латте (б), Сироп (шоколад), Сироп (банан)</td>
-                    <td><span class="label label-info">Наличными</span></td>
-                    <td>200 руб.</td>
-                  </tr>
-                  <tr>
-                    <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                    <td>Купучино (м), Чай (развесной), Латте (б), Сироп (шоколад), Сироп (банан)</td>
-                    <td><span class="label label-info">Наличными</span></td>
-                    <td>110 руб.</td>
-                  </tr>
-                  <tr>
-                    <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                    <td>Купучино (м), Латте (б), Сироп (шоколад), Сироп (банан)</td>
-                    <td><span class="label label-danger">Подарочный</span></td>
-                    <td>0 руб.</td>
-                  </tr>
-                  <tr>
-                    <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                    <td>Купучино (м), Латте (б), Сироп (шоколад), Сироп (банан)</td>
-                    <td><span class="label label-info">Наличными</span></td>
-                    <td>400 руб.</td>
-                  </tr>
-                  <tr>
-                    <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                    <td>Купучино (м), Латте (б), Сироп (шоколад), Сироп (банан)</td>
-                    <td><span class="label label-info">Наличными</span></td>
-                    <td>300 руб.</td>
-                  </tr>
-                  <tr>
-                    <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                    <td>Купучино (м)</td>
-                    <td><span class="label label-success">Безнал.</span></td>
-                    <td>200 руб. </td>
+                  <tr ng-repeat="receipt in cashbox.receipts">
+                    <td><a>OR9842</a></td>
+                    <td>
+                      <span ng-repeat="item in receipt.items track by $index"
+                            >{{item.name}}
+                        <span ng-if="(item.quantity > 1)"> (x{{item.quantity}})</span>
+                        <span ng-if="!$last">, </span>
+                      </span>
+                    </td>
+                    <td>
+                      <span class="label label-success"
+                            ng-if="receipt.type=='card'">Безнал.</span>
+                      <span class="label label-info"
+                            ng-if="receipt.type=='cash'">Наличными</span>
+                      <span class="label label-danger"
+                            ng-if="receipt.type=='free'">Подарочный</span>
+                    </td>
+                    <td>{{receipt.total | currency:''}} руб.</td>
                   </tr>
                   </tbody>
                 </table>
@@ -205,12 +195,12 @@
               <h3 class="box-title">История чеков (просто для любопытства, если легко реализовать)</h3>
             </div>
           </div>
-            
+
           <div class="box-body border-radius-none">
             <div class="chart" id="line-chart" style="height: 250px;"></div>
           </div>
           <!-- /.box-body -->
-            
+
           <div class="box-footer no-border">
             <div class="row">
               <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
@@ -235,11 +225,11 @@
             <!-- /.row -->
           </div>
           <!-- /.box-footer -->
-          
+
         </div>
-          
+
       </div>
-      
+
     </div>
     <!-- END row-->
  </div>

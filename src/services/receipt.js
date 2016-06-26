@@ -12,6 +12,10 @@ function Receipt($http) {
       receipts.push(receipt);
 
       localStorage.setItem('receipts', JSON.stringify(receipts));
+    },
+
+    query() {
+      return JSON.parse(localStorage.getItem('receipts'));
     }
   };
 }
