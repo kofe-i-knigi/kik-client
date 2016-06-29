@@ -8,12 +8,18 @@ const defaultReceipt = {
 };
 
 export default class CashCtrl {
-  constructor(Receipt) {
+  constructor($state, apiCached, Receipt) {
     this.Receipt = Receipt;
+    this.$state = $state;
 
     this.receipts = this.Receipt.query();
-    console.log(this.receipts);
     this.receipt = cloneDeep(defaultReceipt);
+
+    apiCached('/settings').then(settings => {
+      this.settings = settings;
+
+      this.payment  = this.calcPayment();
+    });
   }
 
   addItem(item) {
@@ -42,11 +48,24 @@ export default class CashCtrl {
   }
 
   checkout() {
-    this.receipt.createdAt = new Date();
-    this.Receipt.save(this.receipt);
-    this.receipts.push(this.receipt);
+    const receipt = this.Receipt.save(this.receipt);
+    this.receipts.push(receipt);
 
     this.receipt = cloneDeep(defaultReceipt);
+
+    this.payment  = this.calcPayment();
+  }
+
+  closeShift() {
+    if (!confirm('Вы уверены?')) {
+      return;
+    }
+
+    this.Receipt.closeShift().then(() => {
+      this.receipts = [];
+
+      this.$state.go('barista.cashbox.shiftClosed');
+    });
   }
 
   recalc() {
@@ -60,6 +79,16 @@ export default class CashCtrl {
       this.receipt.change = 0;
     }
   }
+
+  calcPayment() {
+    return this.settings.basePayment + sum(this.receipts.map(receipt => {
+      return sum(receipt.items.map(item => {
+        const markup = Math.max(+item.price - item.costPrice, 0);
+        const bonus = markup / 100 * this.settings.bonusPercent * item.quantity;
+        return Math.ceil(bonus);
+      }));
+    }));
+  }
 }
 
-CashCtrl.$inject = ['Receipt'];
+CashCtrl.$inject = ['$state', 'apiCached', 'Receipt'];

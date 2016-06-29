@@ -5,156 +5,154 @@
         Родник ( Труда 203/3 )
       </div>
       <div class="pull-right">
-        <div class="btn btn-lg btn-success"><i class="fa fa-refresh"></i></div>
-        <div class="btn btn-lg btn-cappuccino">Закрыть смену</div>
+        <span>З/П: {{cashbox.payment | currency}}</span>
+        <button class="btn btn-lg btn-success" ng-click="cashbox.refresh()">
+          <i class="fa fa-refresh"></i>
+        </button>
+        <div class="btn btn-lg btn-cappuccino"
+             ng-click="cashbox.closeShift()">Закрыть смену</div>
       </div>
     </div>
     <!-- START row-->
     <div class="row">
-       <div class="col-md-3">
-          <div class="panel widget hidden-xs">
-             <div class="row row-table">
-                <div class="col-xs-12">
-                  <div class="info-box bg-green">
-                    <span class="info-box-icon">
-                      <i class="fa fa-clock-o"></i>
-                    </span>
+      <div class="col-md-9">
+        <ul class="nav nav-tabs">
+          <li ui-sref-active="active">
+            <a ui-sref="barista.cashbox.menu">Меню</a>
+          </li>
+          <!-- <li ui-sref-active="active"> -->
+          <!--   <a ui-sref="barista.cashbox.preview">Витрина</a> -->
+          <!-- </li> -->
+          <!-- <li ui-sref-active="active"> -->
+          <!--   <a ui-sref="barista.cashbox.preview">Холодильник</a> -->
+          <!-- </li> -->
+          <!-- <li ui-sref-active="active"> -->
+          <!--   <a ui-sref="barista.cashbox.preview">Холодные напитки</a> -->
+          <!-- </li> -->
+          <!-- <li ui-sref-active="active"> -->
+          <!--   <a ui-sref="barista.cashbox.preview">Витрина</a> -->
+          <!-- </li> -->
+          <!-- <li ui-sref-active="active"> -->
+          <!--   <a ui-sref="barista.cashbox.preview">Меню</a> -->
+          <!-- </li> -->
+        </ul>
 
-                    <div class="info-box-content">
-                      <span class="info-box-text">Время</span>
-                      <span class="info-box-number">20:40</span>
+        <div class="bordered clearfix" ui-view></div>
+      </div>
+      <div class="col-md-3">
+        <!-- <div class="panel widget hidden-xs"> -->
+        <!--   <div class="row row-table"> -->
+        <!--     <div class="col-xs-12"> -->
+        <!--       <div class="info-box bg-green"> -->
+        <!--         <span class="info-box-icon"> -->
+        <!--           <i class="fa fa-clock-o"></i> -->
+        <!--         </span> -->
 
-                      <div class="progress">
-                        <div class="progress-bar" style="width: 70%"></div>
-                      </div>
-                          <span class="progress-description">
-                            70% смены
-                          </span>
-                    </div>
-                    <!-- /.info-box-content -->
-                  </div>
-                </div>
-             </div>
+        <!--         <div class="info-box-content"> -->
+        <!--           <span class="info-box-text">Время</span> -->
+        <!--           <span class="info-box-number">20:40</span> -->
+
+        <!--           <div class="progress"> -->
+        <!--             <div class="progress-bar" style="width: 70%"></div> -->
+        <!--           </div> -->
+        <!--           <span class="progress-description"> -->
+        <!--             70% смены -->
+        <!--           </span> -->
+        <!--         </div> -->
+        <!--         <\!-- /.info-box-content -\-> -->
+        <!--       </div> -->
+        <!--     </div> -->
+        <!--   </div> -->
+        <!-- </div> -->
+        <div id="checkout" class="panel panel-success">
+          <div class="panel-heading">Текущий чек</div>
+          <div class="list-group">
+            <div class="list-group-item clearfix"
+                 ng-repeat="item in cashbox.receipt.items track by $index">
+              <span>{{::item.name}}</span>
+              <span ng-if="(item.quantity > 1)"> (x{{item.quantity}})</span>
+              <span class="pull-right">
+                <button class="btn btn-transparent btn-xs"
+                        ng-click="cashbox.removeItem($index)">
+                  <i class="glyphicon glyphicon-remove"></i>
+                </button>
+              </span>
+            </div>
           </div>
-          <div id="checkout" class="panel panel-success">
-            <div class="panel-heading">Текущий чек</div>
-            <div class="list-group">
-              <div class="list-group-item clearfix"
-                   ng-repeat="item in cashbox.receipt.items track by $index">
-                <span>{{::item.name}}</span>
-                <span ng-if="(item.quantity > 1)"> (x{{item.quantity}})</span>
-                <span class="pull-right">
-                  <button class="btn btn-transparent btn-xs"
-                          ng-click="cashbox.removeItem($index)">
-                    <i class="glyphicon glyphicon-remove"></i>
-                  </button>
-                </span>
+          <div class="panel-footer">
+            <div class="row">
+              <div class="col-xs-12 text-center">
+                <div class="btn-group">
+                  <label class="btn-sm btn btn-default"
+                         type="button" ng-model="cashbox.receipt.type"
+                         uib-btn-radio="'cash'">Нал.</label>
+                  <label class="btn-sm btn btn-default"
+                         type="button" ng-model="cashbox.receipt.type"
+                         uib-btn-radio="'card'">Безнал.</label>
+                  <label class="btn-sm btn btn-default"
+                         type="button" ng-model="cashbox.receipt.type"
+                         uib-btn-radio="'free'">За свой счет</label>
+                </div>
               </div>
             </div>
-             <div class="panel-footer">
-                <div class="row">
-                  <div class="col-xs-12 text-center">
-                    <div class="btn-group">
-                      <label class="btn-sm btn btn-default"
-                              type="button" ng-model="cashbox.receipt.type"
-                              uib-btn-radio="'cash'">Нал.</label>
-                      <label class="btn-sm btn btn-default"
-                              type="button" ng-model="cashbox.receipt.type"
-                              uib-btn-radio="'card'">Безнал.</label>
-                      <label class="btn-sm btn btn-default"
-                              type="button" ng-model="cashbox.receipt.type"
-                              uib-btn-radio="'free'">За свой счет</label>
-                    </div>
-                  </div>
+            <div class="row">
+              <div class="col-xs-5">Итого</div>
+              <div class="col-xs-7">
+                <div class="input-group m-b disabled">
+                  <input type="text" class="form-control" value="{{cashbox.receipt.total|currency:''}}" disabled>
+                  <span class="input-group-addon">р.</span>
                 </div>
-                <div class="row">
-                   <div class="col-xs-5">Итого</div>
-                   <div class="col-xs-7">
-                      <div class="input-group m-b disabled">
-                         <input type="text" class="form-control" value="{{cashbox.receipt.total|currency:''}}" disabled>
-                         <span class="input-group-addon">р.</span>
-                      </div>
-                   </div>
-                </div>
-                <div class="row" ng-show="cashbox.receipt.type=='cash'">
-                   <div class="col-xs-5">Наличные</div>
-                   <div class="col-xs-7">
-                      <div class="input-group m-b">
-                         <input id="nal" type="number"
-                                class="form-control"
-                                step="0.01" min="0"
-                                ng-model="cashbox.receipt.cash"
-                                ng-change="cashbox.recalc()">
-                         <span class="input-group-addon">р.</span>
-                      </div>
-                   </div>
-                </div>
-
-                <div class="row" ng-show="cashbox.receipt.type=='cash'">
-                   <div class="col-xs-5">Сдача</div>
-                   <div class="col-xs-7">
-                      <div class="input-group m-b disabled">
-                         <span class="form-control" disabled
-                               >{{cashbox.receipt.change}}</span>
-                         <span class="input-group-addon">р.</span>
-                      </div>
-                   </div>
-                </div>
-                <button class="btn-lg btn btn-danger btn-block" type="button"
-                        ng-click="cashbox.checkout()">Оплатить счет</button>
-             </div>
-          </div>
-       </div>
-       <div class="col-md-9">
-         <ul class="nav nav-tabs">
-           <li ui-sref-active="active">
-             <a ui-sref="barista.cashbox.menu">Из системы</a>
-           </li>
-           <li ui-sref-active="active">
-             <a ui-sref="barista.cashbox.preview">Витрина</a>
-           </li>
-           <li ui-sref-active="active">
-             <a ui-sref="barista.cashbox.preview">Холодильник</a>
-           </li>
-           <li ui-sref-active="active">
-             <a ui-sref="barista.cashbox.preview">Холодные напитки</a>
-           </li>
-           <li ui-sref-active="active">
-             <a ui-sref="barista.cashbox.preview">Витрина</a>
-           </li>
-           <li ui-sref-active="active">
-             <a ui-sref="barista.cashbox.preview">Меню</a>
-           </li>
-         </ul>
-
-         <div class="bordered clearfix" ui-view></div>
-
-            <uib-tab index="$index + 1" ng-repeat="tab in tabs" heading="{{tab.title}}" disable="tab.disabled">
-              {{tab.content}}
-            </uib-tab>
-
-          </uib-tabset>
-
-         </div>
-
-        <div class="col-xs-12">
-          <div class="box box-info">
-            <div class="box-header with-border">
-              <h3 class="box-title">Последние чеки</h3>
+              </div>
             </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <div class="table-responsive">
-                <table class="table no-margin">
-                  <thead>
+            <div class="row" ng-show="cashbox.receipt.type=='cash'">
+              <div class="col-xs-5">Наличные</div>
+              <div class="col-xs-7">
+                <div class="input-group m-b">
+                  <input id="nal" type="number"
+                         class="form-control"
+                         step="0.01" min="0"
+                         ng-model="cashbox.receipt.cash"
+                         ng-change="cashbox.recalc()">
+                  <span class="input-group-addon">р.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="row" ng-show="cashbox.receipt.type=='cash'">
+              <div class="col-xs-5">Сдача</div>
+              <div class="col-xs-7">
+                <div class="input-group m-b disabled">
+                  <span class="form-control" disabled
+                        >{{cashbox.receipt.change}}</span>
+                  <span class="input-group-addon">р.</span>
+                </div>
+              </div>
+            </div>
+            <button class="btn-lg btn btn-danger btn-block" type="button"
+                    ng-click="cashbox.checkout()">Оплатить счет</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="box box-info">
+          <div class="box-header with-border">
+            <h3 class="box-title">Последние чеки</h3>
+          </div>
+          <!-- /.box-header -->
+          <div class="box-body">
+            <div class="table-responsive">
+              <table class="table no-margin">
+                <thead>
                   <tr>
                     <th>Номер чека</th>
                     <th>Заказ</th>
                     <th>Оплата</th>
                     <th>Сумма</th>
                   </tr>
-                  </thead>
-                  <tbody>
+                </thead>
+                <tbody>
                   <tr ng-repeat="receipt in cashbox.receipts">
                     <td><a>OR9842</a></td>
                     <td>
@@ -174,62 +172,62 @@
                     </td>
                     <td>{{receipt.total | currency:''}} руб.</td>
                   </tr>
-                  </tbody>
-                </table>
-              </div>
-              <!-- /.table-responsive -->
+                </tbody>
+              </table>
             </div>
-            <!-- /.box-body -->
-            <div class="box-footer clearfix">
-              <a href="javascript:void(0)" class="btn btn-sm btn-default btn-flat pull-right">Посмотреть все</a>
-            </div>
-            <!-- /.box-footer -->
-          </div>
-        </div>
-
-        <div class="col-xs-12">
-         <!-- solid sales graph -->
-          <div class="box box-solid bg-light-blue-gradient">
-            <div class="box-header">
-              <i class="fa fa-shopping-cart"></i>
-              <h3 class="box-title">История чеков (просто для любопытства, если легко реализовать)</h3>
-            </div>
-          </div>
-
-          <div class="box-body border-radius-none">
-            <div class="chart" id="line-chart" style="height: 250px;"></div>
+            <!-- /.table-responsive -->
           </div>
           <!-- /.box-body -->
-
-          <div class="box-footer no-border">
-            <div class="row">
-              <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
-                <input type="text" class="knob" data-readonly="true" value="20" data-width="60" data-height="60" data-fgColor="#39CCCC">
-
-                <div class="knob-label">Наличными</div>
-              </div>
-              <!-- ./col -->
-              <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
-                <input type="text" class="knob" data-readonly="true" value="50" data-width="60" data-height="60" data-fgColor="#39CCCC">
-
-                <div class="knob-label">Безналичными</div>
-              </div>
-              <!-- ./col -->
-              <div class="col-xs-4 text-center">
-                <input type="text" class="knob" data-readonly="true" value="30" data-width="60" data-height="60" data-fgColor="#39CCCC">
-
-                <div class="knob-label">Всего</div>
-              </div>
-              <!-- ./col -->
-            </div>
-            <!-- /.row -->
+          <div class="box-footer clearfix">
+            <a href="javascript:void(0)" class="btn btn-sm btn-default btn-flat pull-right">Посмотреть все</a>
           </div>
           <!-- /.box-footer -->
-
         </div>
+      </div>
+
+      <div class="col-xs-12">
+        <!-- solid sales graph -->
+        <div class="box box-solid bg-light-blue-gradient">
+          <div class="box-header">
+            <i class="fa fa-shopping-cart"></i>
+            <h3 class="box-title">История чеков (просто для любопытства, если легко реализовать)</h3>
+          </div>
+        </div>
+
+        <div class="box-body border-radius-none">
+          <div class="chart" id="line-chart" style="height: 250px;"></div>
+        </div>
+        <!-- /.box-body -->
+
+        <div class="box-footer no-border">
+          <div class="row">
+            <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
+              <input type="text" class="knob" data-readonly="true" value="20" data-width="60" data-height="60" data-fgColor="#39CCCC">
+
+              <div class="knob-label">Наличными</div>
+            </div>
+            <!-- ./col -->
+            <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
+              <input type="text" class="knob" data-readonly="true" value="50" data-width="60" data-height="60" data-fgColor="#39CCCC">
+
+              <div class="knob-label">Безналичными</div>
+            </div>
+            <!-- ./col -->
+            <div class="col-xs-4 text-center">
+              <input type="text" class="knob" data-readonly="true" value="30" data-width="60" data-height="60" data-fgColor="#39CCCC">
+
+              <div class="knob-label">Всего</div>
+            </div>
+            <!-- ./col -->
+          </div>
+          <!-- /.row -->
+        </div>
+        <!-- /.box-footer -->
 
       </div>
 
     </div>
-    <!-- END row-->
- </div>
+
+</div>
+<!-- END row-->
+</div>

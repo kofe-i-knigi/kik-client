@@ -1,6 +1,6 @@
 <div class="col-xs-12 positions">
   <div ng-repeat="menuItem in vm.menuItems">
-    <div class="col-xs-6">	
+    <div class="col-xs-6">
 	    <button class="btn btn-success btn-lg btn-{{menuItem.color}}"
 	            ng-click="cashbox.addItem(menuItem)">
 	      {{menuItem.name}} <span class="small-price hidden-xs">({{menuItem.price | currency:''}} р.)</span>

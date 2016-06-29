@@ -6,7 +6,7 @@ class RegisterCtrl {
 
     vm.register = () => {
       Auth.register(vm.user)
-      .then(() => $state.go('barista.dashboard'))
+      .then(() => $state.go('barista.cashbox.menu'))
       .catch((res) => console.log(res.data));
     };
   }

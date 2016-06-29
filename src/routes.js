@@ -10,6 +10,7 @@ import DeliveryCreateCtrl from './controllers/stock/create-delivery';
 import DashboardCtrl from './controllers/dashboard';
 import CashboxCtrl from './controllers/barista/cashbox';
 import BaristaMenuCtrl from './controllers/barista/menu';
+import BaristaShiftClosedCtrl from './controllers/barista/shift-closed';
 
 export default function($stateProvider) {
   $stateProvider
@@ -38,6 +39,13 @@ export default function($stateProvider) {
     .state('barista.cashbox.preview', {
       url: 'preview',
       templateUrl: '/templates/barista/preview.html',
+      controllerAs: 'vm'
+    })
+
+    .state('barista.cashbox.shiftClosed', {
+      url: 'shiftclosed',
+      templateUrl: '/templates/barista/shift-closed.html',
+      controller: BaristaShiftClosedCtrl,
       controllerAs: 'vm'
     })
 
