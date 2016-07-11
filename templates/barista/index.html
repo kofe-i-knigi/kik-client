@@ -6,7 +6,7 @@
       </div>
       <div class="pull-right">
         <span>З/П: {{cashbox.payment | currency}}</span>
-        <button class="btn btn-lg btn-success" ng-click="cashbox.refresh()">
+        <button class="btn btn-lg btn-success" ng-click="cashbox.syncWithBackend()">
           <i class="fa fa-refresh"></i>
         </button>
         <div class="btn btn-lg btn-cappuccino"

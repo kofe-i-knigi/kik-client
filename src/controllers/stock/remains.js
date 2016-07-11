@@ -3,6 +3,7 @@ import {extend} from 'lodash';
 export default class RemainsCtrl {
   constructor($stateParams, Stock, NgTableParams) {
     this.filters = {};
+    this.Stock = Stock;
     this.tableParams = new NgTableParams({
       page: 1,
       count: 20,
@@ -22,6 +23,15 @@ export default class RemainsCtrl {
           return data;
         });
       }
+    });
+  }
+
+  updateQuantity(product) {
+    this.Stock.updateQuantity({
+      storeId: product.stock[0].storeId,
+      productId: product.id
+    }, {
+      quantity: product.stock[0].quantity
     });
   }
 }

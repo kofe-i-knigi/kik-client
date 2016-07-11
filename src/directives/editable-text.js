@@ -5,7 +5,8 @@ export default function editableText() {
     templateUrl: '/templates/directives/editable-text.html',
     scope: {
       change: '&',
-      text: '=ngModel'
+      text: '=ngModel',
+      unit: '='
     },
     compile: compile
   };
@@ -18,7 +19,7 @@ function compile(tElement) {
 
   return {
     pre: precompile
-  }
+  };
 }
 
 function precompile(scope, element, attrs, ngModel) {
@@ -32,24 +33,24 @@ function precompile(scope, element, attrs, ngModel) {
 
     scope.showEditor = true;
     setTimeout(() => {
-      element.find('input')[0].focus()
-    }, 0)
+      element.find('input')[0].focus();
+    }, 0);
     scope.focus = true;
   };
 
   scope.closeWithoutSaving = () => {
-    ngModel.$setDirty()
-    scope.showEditor = false
+    ngModel.$setDirty();
+    scope.showEditor = false;
   };
 
   scope.saveChanges = () => {
-    scope.showEditor = false
-    ngModel.$setPristine()
+    scope.showEditor = false;
+    ngModel.$setPristine();
     if (scope.newText != scope.text) {
-      scope.text = scope.newText
-      ngModel.$setViewValue(scope.newText)
+      scope.text = scope.newText;
+      ngModel.$setViewValue(scope.newText);
 
-      scope.change()
+      scope.change();
     }
   };
 }

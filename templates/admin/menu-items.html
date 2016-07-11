@@ -31,10 +31,18 @@
               <div class="col-md-7">
                 <div class="form-group" ng-hide="vm.newEntity.isComposite">
                   <label>Название</label>
-                  <input type="text" ng-model="vm.newEntity.products[0]" typeahead-editable="false"
-                    uib-typeahead="product as product.name for product in vm.searchSimpleProducts($viewValue)"
+                  <input type="text"
+                         ng-model="vm.newEntity.products[0]" typeahead-editable="false"
+                         uib-typeahead="product as product.name for product in vm.searchSimpleProducts($viewValue)"
                     typeahead-min-length="0"
                     class="form-control" typeahead-on-select="vm.updateProductName()" required>
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox"
+                           ng-model="vm.searchIncludeIngridients">
+                    Искать ингридиенты
+                  </label>
                 </div>
               </div>
 

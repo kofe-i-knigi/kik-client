@@ -20,7 +20,9 @@
               {{::product.name}}
             </td>
             <td data-title="'Остаток'" sortable="'quantity'">
-              {{::product.stock[0].quantity || 0}} {{::product.unit}}
+              <editable-text ng-model="product.stock[0].quantity"
+                             change="vm.updateQuantity(product)"
+                             unit="product.unit" required>
             </td>
             <td data-title="'Себестоимость, руб.'" sortable="'costPrice'">
               {{::product.costPrice | currency:''}}

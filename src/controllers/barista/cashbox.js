@@ -89,6 +89,14 @@ export default class CashCtrl {
       }));
     }));
   }
+
+  syncWithBackend() {
+    console.log('here');
+    localStorage.removeItem('/menuitems');
+    localStorage.removeItem('/settings');
+
+    this.$state.go(this.$state.current, {}, {reload: true});
+  }
 }
 
 CashCtrl.$inject = ['$state', 'apiCached', 'Receipt'];

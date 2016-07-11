@@ -5,6 +5,7 @@ export default class MenuCtrl extends CrudCtrl {
   constructor(MenuItem, Product, NgTableParams) {
     super(MenuItem, NgTableParams);
 
+    this.searchIncludeIngridients = false;
     this.MenuItem = MenuItem;
     this.Product = Product;
 
@@ -20,7 +21,7 @@ export default class MenuCtrl extends CrudCtrl {
   searchSimpleProducts(query) {
     return this.Product.query({
       'filter[name]': query,
-      'filter[isIngridient]': false
+      'filter[isIngridient]': this.searchIncludeIngridients
     }).$promise;
   }
 

@@ -4854,14 +4854,14 @@ body {
   padding:5px 6.5px;
 }
 #checkout .btn-group>.btn:first-child:not(:last-child) {
-  
+
 }
 #checkout .btn-group>.btn:last-child:not(:first-child) {
 
 }
 
 
-.positions .btn, 
+.positions .btn,
 .positions .ColVis .ColVis_Button, .ColVis .positions .ColVis_Button {
   width: 100%;
   margin: 10px 0;
@@ -5308,4 +5308,22 @@ body {
 .btn-bonaqua .badge {
   color: #C0BFC6;
   background-color: #192C81;
+}
+
+.store-link {
+  display: block;
+}
+
+.editable-preview {
+  display: inline-block;
+  width: 100%;
+}
+
+.text-editor > form {
+  max-width: 200px;
+}
+
+.editable-input-group {
+  display: inline-block;
+  width: 90%;
 }
