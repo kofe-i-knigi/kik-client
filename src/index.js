@@ -22,7 +22,8 @@ angular.module('KIK', [
   directives
 ])
 
-.config(($locationProvider, $httpProvider, jwtInterceptorProvider) => {
+.config(['$locationProvider', '$httpProvider', 'jwtInterceptorProvider',
+  ($locationProvider, $httpProvider, jwtInterceptorProvider) => {
   $locationProvider.html5Mode(true).hashPrefix('!');
 
   jwtInterceptorProvider.tokenGetter = function() {
@@ -31,7 +32,7 @@ angular.module('KIK', [
 
   $httpProvider.interceptors.push('jwtInterceptor');
   $httpProvider.interceptors.push('apiErrorHandler');
-})
+}])
 
 .config(['$stateProvider', routes]);
 
