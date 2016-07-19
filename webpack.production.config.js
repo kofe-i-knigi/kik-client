@@ -14,11 +14,16 @@ const uglifyPlugin = new webpack.optimize.UglifyJsPlugin({
 });
 
 module.exports = {
-  entry: ['./src/index.js'],
+  entry: [`${__dirname}/src/index`],
   output: {
-      path: __dirname + "/dist",
-      publicPath: "/dist",
+      path: `${__dirname}/dist`,
+      publicPath: '/dist',
       filename: "index.js"
+  },
+
+  resolve: {
+    modulesDirectories: ['node_modules', 'src'],
+    extension: ['', '.js', '.css']
   },
 
   module: {
