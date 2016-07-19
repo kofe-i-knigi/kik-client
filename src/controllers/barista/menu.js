@@ -2,7 +2,7 @@ export default class MenuCtrl {
   constructor(apiCached) {
     this.apiCached = apiCached;
 
-    apiCached('/menuitems').then(menuItems => {
+    apiCached('/menu').then(menuItems => {
       this.menuItems = menuItems;
     });
   }
