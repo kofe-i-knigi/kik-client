@@ -1,6 +1,12 @@
 const path = require('path');
 const webpack = require('webpack');
 
+const uglifyPlugin = new webpack.optimize.UglifyJsPlugin({
+    compress: {
+        warnings: false
+    }
+});
+
 module.exports = {
   entry: ['./src/index.js'],
   output: {
@@ -46,6 +52,7 @@ module.exports = {
   },
 
   plugins: [
+    uglifyPlugin
   ],
 
   eslint: {

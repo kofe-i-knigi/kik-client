@@ -2,7 +2,7 @@ import {extend} from 'lodash';
 import {API_BASE} from '../config';
 
 export default function Resource(name, newActions) {
-  return function($resource) {
+  const Resource = function($resource) {
     const actions = {
       query: {
         isArray: true,
@@ -31,6 +31,8 @@ export default function Resource(name, newActions) {
 
     return $resource(`${API_BASE}/${name}/:id`, {}, actions);
   };
-}
 
-Resource.$inject = ['$resource'];
+  Resource.$inject = ['$resource'];
+
+  return Resource;
+}
