@@ -92,9 +92,12 @@ export default class CashCtrl {
   }
 
   syncWithBackend() {
-    console.log('here');
-    localStorage.removeItem('/menuitems');
+    localStorage.removeItem('/menu');
     localStorage.removeItem('/settings');
+
+    this.categories.forEach(category => {
+      localStorage.removeItem(`/menu/${category.id}`);
+    });
 
     this.$state.go(this.$state.current, {}, {reload: true});
   }
