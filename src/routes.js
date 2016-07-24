@@ -21,14 +21,6 @@ export default function($stateProvider) {
       template: '<ui-view>'
     })
 
-    .state('admin', {
-      url: '/admin',
-      abstract: true,
-      templateUrl: '/templates/admin/index.html',
-      controller: AdminCtrl,
-      controllerAs: 'adminCtrl'
-    })
-
     .state('barista.cashbox', {
       url: '',
       abstract: true,
@@ -42,7 +34,6 @@ export default function($stateProvider) {
       }
     })
 
-
     .state('barista.cashbox.defaultMenu', {
       url: '',
       controller: ['$state', 'categories', ($state, categories) => {
@@ -55,7 +46,7 @@ export default function($stateProvider) {
     })
 
     .state('barista.cashbox.menu', {
-      url: ':categoryId',
+      url: 'menu/:categoryId',
       templateUrl: '/templates/barista/menu.html',
       controller: BaristaMenuCtrl,
       controllerAs: 'vm'
@@ -72,6 +63,14 @@ export default function($stateProvider) {
       templateUrl: '/templates/barista/shift-closed.html',
       controller: BaristaShiftClosedCtrl,
       controllerAs: 'vm'
+    })
+
+    .state('admin', {
+      url: '/admin',
+      abstract: true,
+      templateUrl: '/templates/admin/index.html',
+      controller: AdminCtrl,
+      controllerAs: 'adminCtrl'
     })
 
     .state('login', {
