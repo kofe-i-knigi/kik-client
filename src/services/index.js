@@ -8,6 +8,7 @@ import Stock from './stock';
 import Delivery from './delivery';
 import Product from './product';
 import MenuItem from './menu-item';
+import Category from './category';
 import apiErrorHanler from './api-error-handler';
 
 import apiCached from './api-cached';
@@ -23,6 +24,7 @@ angular.module('app.services', [ngResource])
 .service('MenuItem', MenuItem)
 .service('apiCached', apiCached)
 .service('Receipt', Receipt)
+.service('Category', Category)
 .service('apiErrorHandler', apiErrorHanler);
 
 export default 'app.services';

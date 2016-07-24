@@ -17,24 +17,9 @@
     <div class="row">
       <div class="col-md-9">
         <ul class="nav nav-tabs">
-          <li ui-sref-active="active">
-            <a ui-sref="barista.cashbox.menu">Меню</a>
+          <li ng-repeat="category in cashbox.categories" ui-sref-active="active">
+            <a ui-sref="barista.cashbox.menu({categoryId: category.id})">{{category.name}}</a>
           </li>
-          <!-- <li ui-sref-active="active"> -->
-          <!--   <a ui-sref="barista.cashbox.preview">Витрина</a> -->
-          <!-- </li> -->
-          <!-- <li ui-sref-active="active"> -->
-          <!--   <a ui-sref="barista.cashbox.preview">Холодильник</a> -->
-          <!-- </li> -->
-          <!-- <li ui-sref-active="active"> -->
-          <!--   <a ui-sref="barista.cashbox.preview">Холодные напитки</a> -->
-          <!-- </li> -->
-          <!-- <li ui-sref-active="active"> -->
-          <!--   <a ui-sref="barista.cashbox.preview">Витрина</a> -->
-          <!-- </li> -->
-          <!-- <li ui-sref-active="active"> -->
-          <!--   <a ui-sref="barista.cashbox.preview">Меню</a> -->
-          <!-- </li> -->
         </ul>
 
         <div class="bordered clearfix" ui-view></div>

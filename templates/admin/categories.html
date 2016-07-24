@@ -1,0 +1,56 @@
+<section class="content-header">
+  <h1>Категории</h1>
+</section>
+
+<section class="content">
+  <div class="row">
+    <div class="col-xs-12">
+      <button class="btn btn-primary" ng-click="vm.openCreateForm()" ng-hide="vm.createFormOpened">Добавить</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="box" ng-show="vm.createFormOpened">
+        <div class="box-body">
+          <form ng-submit="vm.createEntity()" name="vm.createForm">
+            <a href="" ng-click="vm.createFormOpened=false">
+              <i class="fa fa-times" aria-hidden="true"></i>
+            </a>
+
+            <div class="form-group">
+              <label>Название</label>
+              <input class="form-control" type="text"
+                     ng-model="vm.newEntity.name" required>
+            </div>
+            <button class="btn btn-primary" type="submit">Добавить</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-6 list-goods-box">
+      <div class="box">
+        <table class="table table-bordered table-hover"
+               ng-table="vm.tableParams">
+          <colgroup>
+            <col width="90%">
+            <col width="10%">
+          </colgroup>
+          <tr ng-repeat="category in $data">
+            <td data-title="'Название'">
+              <editable-text ng-model="category.name"
+                             change="vm.updateItem(category)">
+            </td>
+            <td>
+              <button class="btn btn-xs btn-danger" ng-click="vm.removeEntity(category)">
+                <i class="glyphicon glyphicon-remove"></i>
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>

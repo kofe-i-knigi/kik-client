@@ -1,8 +1,8 @@
 export default class MenuCtrl {
-  constructor(apiCached) {
+  constructor($stateParams, apiCached) {
     this.apiCached = apiCached;
 
-    apiCached('/menu').then(menuItems => {
+    apiCached(`/menu/${$stateParams.categoryId}`).then(menuItems => {
       this.menuItems = menuItems;
     });
   }
@@ -14,4 +14,4 @@ export default class MenuCtrl {
   }
 }
 
-MenuCtrl.$inject = ['apiCached'];
+MenuCtrl.$inject = ['$stateParams', 'apiCached'];

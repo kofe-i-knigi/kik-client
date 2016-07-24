@@ -2,12 +2,14 @@ import {extend, cloneDeep, clone, map} from 'lodash';
 import CrudCtrl from './crud';
 
 export default class MenuCtrl extends CrudCtrl {
-  constructor(MenuItem, Product, NgTableParams) {
+  constructor(MenuItem, Product, Category, NgTableParams) {
     super(MenuItem, NgTableParams);
 
     this.searchIncludeIngridients = false;
     this.MenuItem = MenuItem;
     this.Product = Product;
+
+    this.categories = Category.getAll();
 
     extend(this.newEntityDefault, {
       price: 0,
@@ -96,4 +98,4 @@ export default class MenuCtrl extends CrudCtrl {
   }
 }
 
-MenuCtrl.$inject = ['MenuItem', 'Product', 'NgTableParams'];
+MenuCtrl.$inject = ['MenuItem', 'Product', 'Category', 'NgTableParams'];

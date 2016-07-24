@@ -4,6 +4,7 @@ import RegisterCtrl from './controllers/register';
 import UserListCtrl from './controllers/users';
 import ProductListCtrl from './controllers/products';
 import MenuItemCtrl from './controllers/menu-items';
+import CategoryCtrl from './controllers/categories';
 import StoreListCtrl from './controllers/stores';
 import StockCtrl from './controllers/stock/remains';
 import DeliveryCreateCtrl from './controllers/stock/create-delivery';
@@ -14,7 +15,6 @@ import BaristaShiftClosedCtrl from './controllers/barista/shift-closed';
 
 export default function($stateProvider) {
   $stateProvider
-
     .state('barista', {
       url: '/',
       abstract: true,
@@ -26,11 +26,28 @@ export default function($stateProvider) {
       abstract: true,
       templateUrl: '/templates/barista/index.html',
       controller: CashboxCtrl,
-      controllerAs: 'cashbox'
+      controllerAs: 'cashbox',
+      resolve: {
+        categories: ['apiCached', (apiCached) => {
+          return apiCached('/menu');
+        }]
+      }
+    })
+
+
+    .state('barista.cashbox.defaultMenu', {
+      url: '',
+      controller: ['$state', 'categories', ($state, categories) => {
+        if (categories[0] && categories[0].id) {
+          $state.go('barista.cashbox.menu', {
+            categoryId: categories[0].id
+          });
+        }
+      }]
     })
 
     .state('barista.cashbox.menu', {
-      url: '',
+      url: ':categoryId',
       templateUrl: '/templates/barista/menu.html',
       controller: BaristaMenuCtrl,
       controllerAs: 'vm'
@@ -123,6 +140,13 @@ export default function($stateProvider) {
       url: '/menuitems',
       templateUrl: '/templates/admin/menu-items.html',
       controller: MenuItemCtrl,
+      controllerAs: 'vm'
+    })
+
+    .state('admin.categories', {
+      url: '/categories',
+      templateUrl: '/templates/admin/categories.html',
+      controller: CategoryCtrl,
       controllerAs: 'vm'
     });
 }

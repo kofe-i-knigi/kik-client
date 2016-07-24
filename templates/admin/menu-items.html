@@ -26,7 +26,20 @@
                 Составной
               </label>
             </div>
-
+            <div class="row">
+              <div class="col-md-7">
+                <div class="form-group" ng-hide="vm.newEntity.isComposite">
+                  <label>Категория</label>
+                  <input type="text" class="form-control" required
+                         ng-model="vm.newEntity.category"
+                         uib-typeahead="category as category.name for
+                                        category in vm.categories | filter:$viewValue"
+                         typeahead-editable="false"
+                         typeahead-min-length="0"
+                         typeahead-on-select="vm.updateProductName()">
+                </div>
+              </div>
+            </div>
             <div class="row">
               <div class="col-md-7">
                 <div class="form-group" ng-hide="vm.newEntity.isComposite">
@@ -166,7 +179,8 @@
       <div class="box  list-goods-box">
         <table ng-table="vm.tableParams" class="table table-bordered table-hover">
           <colgroup>
-            <col width="42%">
+            <col width="30%">
+            <col width="12%">
             <col width="12%">
             <col width="12%">
             <col width="12%">
@@ -230,6 +244,15 @@
                   </form>
                 </li>
               </div>
+            </td>
+            <td data-title="'Категория'">
+              <input type="text" class="form-control input-sm" required
+                     ng-model="menuItem.category"
+                     uib-typeahead="product as product.name for
+                     product in vm.categories | filter:$viewValue"
+                     typeahead-editable="false"
+                     typeahead-min-length="0"
+                     typeahead-on-select="vm.updateEntity(menuItem)">
             </td>
             <td data-title="'Цена'">
               <editable-text ng-model="menuItem.price" change="vm.updateEntity(menuItem)" required>

@@ -8,12 +8,13 @@ const defaultReceipt = {
 };
 
 export default class CashCtrl {
-  constructor($state, apiCached, Receipt) {
+  constructor($state, apiCached, Receipt, categories) {
     this.Receipt = Receipt;
     this.$state = $state;
 
     this.receipts = this.Receipt.query();
     this.receipt = cloneDeep(defaultReceipt);
+    this.categories = categories;
 
     apiCached('/settings').then(settings => {
       this.settings = settings;
@@ -99,4 +100,4 @@ export default class CashCtrl {
   }
 }
 
-CashCtrl.$inject = ['$state', 'apiCached', 'Receipt'];
+CashCtrl.$inject = ['$state', 'apiCached', 'Receipt', 'categories'];
