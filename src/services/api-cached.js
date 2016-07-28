@@ -1,10 +1,11 @@
 import {API_BASE} from '../config';
 
-function apiCached($http) {
+function apiCached($rootScope, $timeout, $http) {
   return function(url, recache) {
     const data = localStorage.getItem(url);
 
     if (data && !recache) {
+      $timeout(() => $rootScope.$apply());
       return Promise.resolve(JSON.parse(data));
     } else {
       return $http.get(`${API_BASE}${url}`).then(res => {
@@ -16,6 +17,6 @@ function apiCached($http) {
   };
 }
 
-apiCached.$inject = ['$http'];
+apiCached.$inject = ['$rootScope', '$timeout', '$http'];
 
 export default apiCached;

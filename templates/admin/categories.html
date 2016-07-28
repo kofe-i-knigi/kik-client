@@ -41,7 +41,7 @@
           <tr ng-repeat="category in $data">
             <td data-title="'Название'">
               <editable-text ng-model="category.name"
-                             change="vm.updateItem(category)">
+                             change="vm.updateEntity(category)">
             </td>
             <td>
               <button class="btn btn-xs btn-danger" ng-click="vm.removeEntity(category)">

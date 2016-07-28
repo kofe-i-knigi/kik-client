@@ -1,11 +1,17 @@
-import {cloneDeep, sum, find} from 'lodash';
+import {cloneDeep, sum, find, partial} from 'lodash';
 
 const defaultReceipt = {
   items: [],
   total: 0,
-  type: 'cash',
-  cash: 0
+  cash: 0,
+  discount: 0
 };
+
+function receiptItemBonus(bonusPercent, item) {
+  const markup = Math.max(+item.price - item.costPrice, 0);
+  const bonus = markup / 100 * bonusPercent * item.quantity;
+  return Math.ceil(bonus);
+}
 
 export default class CashCtrl {
   constructor($state, apiCached, Receipt, categories) {
@@ -16,10 +22,12 @@ export default class CashCtrl {
     this.receipt = cloneDeep(defaultReceipt);
     this.categories = categories;
 
+    this._refreshTotalCash();
+
     apiCached('/settings').then(settings => {
       this.settings = settings;
 
-      this.payment  = this.calcPayment();
+      this._refreshPayment();
     });
   }
 
@@ -54,7 +62,8 @@ export default class CashCtrl {
 
     this.receipt = cloneDeep(defaultReceipt);
 
-    this.payment  = this.calcPayment();
+    this._refreshPayment();
+    this._refreshTotalCash();
   }
 
   closeShift() {
@@ -70,25 +79,24 @@ export default class CashCtrl {
   }
 
   recalc() {
-    this.receipt.total = sum(this.receipt.items.map(item => {
-      return +item.price * item.quantity;
-    }));
+    if (this.receipt.selfPaid) {
+      this.receipt.discount = 0;
+      this.receipt.total = -sum(this.receipt.items.map(item => {
+        return +item.costPrice * item.quantity;
+      }));
+    } else {
+      this.receipt.total = sum(this.receipt.items.map(item => {
+        return +item.price * item.quantity;
+      }));
+
+      this.receipt.total -= this.receipt.total * this.receipt.discount / 100;
+    }
 
     if (this.receipt.cash > this.receipt.total) {
       this.receipt.change = this.receipt.cash - this.receipt.total;
     } else {
       this.receipt.change = 0;
     }
-  }
-
-  calcPayment() {
-    return this.settings.basePayment + sum(this.receipts.map(receipt => {
-      return sum(receipt.items.map(item => {
-        const markup = Math.max(+item.price - item.costPrice, 0);
-        const bonus = markup / 100 * this.settings.bonusPercent * item.quantity;
-        return Math.ceil(bonus);
-      }));
-    }));
   }
 
   syncWithBackend() {
@@ -100,6 +108,28 @@ export default class CashCtrl {
     });
 
     this.$state.go(this.$state.current, {}, {reload: true});
+  }
+
+  // private
+  _refreshTotalCash() {
+    this.totalCash = sum(this.receipts.map(receipt => receipt.total));
+  }
+
+  _refreshPayment() {
+    const todayBonus = sum(this.receipts.map(receipt => {
+      if (receipt.selfPaid) {
+        return receipt.total;
+      } else {
+        const bonuses = receipt.items.map(partial(
+          receiptItemBonus,
+          this.settings.bonusPercent));
+        const totalBonus = sum(bonuses);
+
+        return totalBonus - totalBonus * (receipt.discount || 0) / 100;
+      }
+    }));
+
+    this.payment = this.settings.basePayment + todayBonus;
   }
 }
 

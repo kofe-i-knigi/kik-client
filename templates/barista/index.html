@@ -5,6 +5,7 @@
         Родник ( Труда 203/3 )
       </div>
       <div class="pull-right">
+        <span>Касса: {{cashbox.totalCash | currency}}</span>
         <span>З/П: {{cashbox.payment | currency}}</span>
         <button class="btn btn-lg btn-success" ng-click="cashbox.syncWithBackend()">
           <i class="fa fa-refresh"></i>
@@ -15,7 +16,7 @@
     </div>
     <!-- START row-->
     <div class="row">
-      <div class="col-sm-9">
+      <div class="col-sm-8 col-md-9">
         <ul class="nav nav-tabs">
           <li ng-repeat="category in cashbox.categories" ui-sref-active="active">
             <a ui-sref="barista.cashbox.menu({categoryId: category.id})">{{category.name}}</a>
@@ -24,7 +25,7 @@
 
         <div class="bordered clearfix" ui-view></div>
       </div>
-      <div class="col-sm-3">
+      <div class="col-sm-4 col-md-3">
         <!-- <div class="panel widget hidden-xs"> -->
         <!--   <div class="row row-table"> -->
         <!--     <div class="col-xs-12"> -->
@@ -50,7 +51,11 @@
         <!--   </div> -->
         <!-- </div> -->
         <div id="checkout" class="panel panel-success">
-          <div class="panel-heading">Текущий чек</div>
+          <div class="panel-heading">
+            Текущий чек
+
+          <div class="clearfix"></div>
+          </div>
           <div class="list-group">
             <div class="list-group-item clearfix"
                  ng-repeat="item in cashbox.receipt.items track by $index">
@@ -66,17 +71,34 @@
           </div>
           <div class="panel-footer">
             <div class="row">
-              <div class="col-xs-12 text-center">
-                <div class="btn-group">
-                  <label class="btn-sm btn btn-default"
-                         type="button" ng-model="cashbox.receipt.type"
-                         uib-btn-radio="'cash'">Нал.</label>
-                  <label class="btn-sm btn btn-default"
-                         type="button" ng-model="cashbox.receipt.type"
-                         uib-btn-radio="'card'">Безнал.</label>
-                  <label class="btn-sm btn btn-default"
-                         type="button" ng-model="cashbox.receipt.type"
-                         uib-btn-radio="'free'">За свой счет</label>
+              <div class="col-lg-12">
+                <button class="btn-sm btn btn-default text-center"
+                        ng-click="cashbox.recalc()"
+                        type="button" ng-model="cashbox.receipt.selfPaid"
+                        uib-btn-checkbox>За свой счет</button>
+              </div>
+              <div class="col-lg-12">
+                <div class="btn-group text-center" style="white-space:nowrap">
+                  <label class="btn-sm btn btn-default" title="Скидка"
+                         type="button" ng-model="cashbox.receipt.discount"
+                         ng-disabled="cashbox.receipt.selfPaid"
+                         ng-click="cashbox.recalc()"
+                         uib-btn-radio="5">5%</label>
+                  <label class="btn-sm btn btn-default" title="Скидка"
+                         type="button" ng-model="cashbox.receipt.discount"
+                         ng-disabled="cashbox.receipt.selfPaid"
+                         ng-click="cashbox.recalc()"
+                         uib-btn-radio="7">7%</label>
+                  <label class="btn-sm btn btn-default" title="Скидка"
+                         type="button" ng-model="cashbox.receipt.discount"
+                         ng-disabled="cashbox.receipt.selfPaid"
+                         ng-click="cashbox.recalc()"
+                         uib-btn-radio="10">10%</label>
+                  <label class="btn-sm btn btn-default" title="Скидка"
+                         type="button" ng-model="cashbox.receipt.discount"
+                         ng-disabled="cashbox.receipt.selfPaid"
+                         ng-click="cashbox.recalc()"
+                         uib-btn-radio="20">20%</label>
                 </div>
               </div>
             </div>

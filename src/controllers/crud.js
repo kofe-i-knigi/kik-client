@@ -47,7 +47,6 @@ export default class CrudCtrl {
   }
 
   updateEntity(entity) {
-    console.log(entity);
     this.Resource.update({id: entity.id}, entity);
   }
 }
