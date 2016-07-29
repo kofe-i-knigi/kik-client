@@ -4868,10 +4868,11 @@ body {
 .positions .ColVis .ColVis_Button, .ColVis .positions .ColVis_Button {
   width: 100%;
   margin: 5px 0;
-  padding: 10px;
+  padding: 0 10px;
   word-wrap: normal;
   white-space: normal;
-  height: 95px;
+  min-height: 75px;
+  font-size: 16px;
 }
 
 .positions .col-xs-4 {
@@ -4889,6 +4890,25 @@ body {
 .positions .small-price {
   font-size: 12px;
   opacity: .8;
+}
+
+#checkout {
+  margin-top: 41px;
+  font-size:16px;
+}
+
+#checkout .panel-footer .btn {
+  font-size:16px;
+  padding: 5px 9.5px;
+}
+
+.btn-own {
+  width: 100%;
+}
+
+#checkout .btn-danger {
+  font-size: 22px;
+  padding:7px 10px;
 }
 
 .main-nav li {
