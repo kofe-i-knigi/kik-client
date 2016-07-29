@@ -4817,6 +4817,10 @@ body {
   background-color: transparent;
 }
 
+#barista-menu .header .reward {
+  padding-left: 20px;
+}
+
 #barista-menu .widget {
   box-shadow: none;
   -webkit-box-shadow: none;
@@ -4860,12 +4864,26 @@ body {
 
 }
 
-
 .positions .btn,
 .positions .ColVis .ColVis_Button, .ColVis .positions .ColVis_Button {
   width: 100%;
-  margin: 10px 0;
-  padding: 10px 5px;
+  margin: 5px 0;
+  padding: 10px;
+  word-wrap: normal;
+  white-space: normal;
+  height: 95px;
+}
+
+.positions .col-xs-4 {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.positions .btn .title {
+  display: table-cell;
+  vertical-align: middle;
+  height: 366px;
+  padding: 0 30px;
 }
 
 .positions .small-price {
@@ -4883,10 +4901,14 @@ body {
 }
 
 #barista-menu .bordered {
-  padding: 10px 20px;
+  padding: 20px 0px;
   border-style: solid;
   border-width: 0 1px 1px 1px;
   border-color: #dde6e9;
+}
+
+.last-checkout {
+  margin-top: 20px;
 }
 
 /* Custom buttons */

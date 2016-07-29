@@ -5,8 +5,8 @@
         Родник ( Труда 203/3 )
       </div>
       <div class="pull-right">
-        <span>Касса: {{cashbox.totalCash | currency}}</span>
-        <span>З/П: {{cashbox.payment | currency}}</span>
+        <span class="kassa">Касса: {{cashbox.totalCash | currency}}</span>
+        <span class="reward">З/П: {{cashbox.payment | currency}}</span>
         <button class="btn btn-lg btn-success" ng-click="cashbox.syncWithBackend()">
           <i class="fa fa-refresh"></i>
         </button>
@@ -143,7 +143,7 @@
     </div>
     <div class="row">
       <div class="col-xs-12">
-        <div class="box box-info">
+        <div class="box box-info last-checkout">
           <div class="box-header with-border">
             <h3 class="box-title">Последние чеки</h3>
           </div>
@@ -191,49 +191,6 @@
           <!-- /.box-footer -->
         </div>
       </div>
-
-      <div class="col-xs-12">
-        <!-- solid sales graph -->
-        <div class="box box-solid bg-light-blue-gradient">
-          <div class="box-header">
-            <i class="fa fa-shopping-cart"></i>
-            <h3 class="box-title">История чеков (просто для любопытства, если легко реализовать)</h3>
-          </div>
-        </div>
-
-        <div class="box-body border-radius-none">
-          <div class="chart" id="line-chart" style="height: 250px;"></div>
-        </div>
-        <!-- /.box-body -->
-
-        <div class="box-footer no-border">
-          <div class="row">
-            <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
-              <input type="text" class="knob" data-readonly="true" value="20" data-width="60" data-height="60" data-fgColor="#39CCCC">
-
-              <div class="knob-label">Наличными</div>
-            </div>
-            <!-- ./col -->
-            <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
-              <input type="text" class="knob" data-readonly="true" value="50" data-width="60" data-height="60" data-fgColor="#39CCCC">
-
-              <div class="knob-label">Безналичными</div>
-            </div>
-            <!-- ./col -->
-            <div class="col-xs-4 text-center">
-              <input type="text" class="knob" data-readonly="true" value="30" data-width="60" data-height="60" data-fgColor="#39CCCC">
-
-              <div class="knob-label">Всего</div>
-            </div>
-            <!-- ./col -->
-          </div>
-          <!-- /.row -->
-        </div>
-        <!-- /.box-footer -->
-
-      </div>
-
-    </div>
 
 </div>
 <!-- END row-->
