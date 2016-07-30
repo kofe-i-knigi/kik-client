@@ -112,7 +112,9 @@ export default class CashCtrl {
 
   // private
   _refreshTotalCash() {
-    this.totalCash = sum(this.receipts.map(receipt => receipt.total));
+    this.totalCash = sum(this.receipts.map(receipt => {
+      return receipt.selfPaid ? -receipt.total : receipt.total
+    }));
   }
 
   _refreshPayment() {
