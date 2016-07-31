@@ -1,4 +1,4 @@
-import {cloneDeep, sum, find, partial} from 'lodash';
+import {cloneDeep, sum, find} from 'lodash';
 
 const defaultReceipt = {
   items: [],
@@ -7,16 +7,15 @@ const defaultReceipt = {
   discount: 0
 };
 
-function receiptItemBonus(bonusPercent, item) {
-  const markup = Math.max(+item.price - item.costPrice, 0);
-  const bonus = markup / 100 * bonusPercent * item.quantity;
-  return Math.ceil(bonus);
-}
-
 export default class CashCtrl {
-  constructor($state, apiCached, Receipt, categories) {
+  constructor($state, apiCached, Auth, Receipt, categories) {
     this.Receipt = Receipt;
     this.$state = $state;
+
+    this.user = Auth.myUser();
+    if (!this.user) {
+      return $state.go('login');
+    }
 
     this.receipts = this.Receipt.query();
     this.receipt = cloneDeep(defaultReceipt);
@@ -86,10 +85,13 @@ export default class CashCtrl {
       }));
     } else {
       this.receipt.total = sum(this.receipt.items.map(item => {
-        return +item.price * item.quantity;
-      }));
+        var price = +item.price;
+        if (this._hasDiscount(item)) {
+          price -= price * this.receipt.discount;
+        }
 
-      this.receipt.total -= this.receipt.total * this.receipt.discount / 100;
+        return price * item.quantity;
+      }));
     }
 
     if (this.receipt.cash > this.receipt.total) {
@@ -110,10 +112,15 @@ export default class CashCtrl {
     this.$state.go(this.$state.current, {}, {reload: true});
   }
 
-  // private
+  _hasDiscount(item) {
+    const category = find(this.categories, {id: item.categoryId});
+
+    return category && category.hasDiscount;
+  }
+
   _refreshTotalCash() {
     this.totalCash = sum(this.receipts.map(receipt => {
-      return receipt.selfPaid ? -receipt.total : receipt.total
+      return receipt.selfPaid ? -receipt.total : receipt.total;
     }));
   }
 
@@ -122,12 +129,15 @@ export default class CashCtrl {
       if (receipt.selfPaid) {
         return receipt.total;
       } else {
-        const bonuses = receipt.items.map(partial(
-          receiptItemBonus,
-          this.settings.bonusPercent));
-        const totalBonus = sum(bonuses);
+        return sum(receipt.items.map((item) => {
+          const markup = Math.max(+item.price - item.costPrice, 0);
+          var bonus = markup / 100 * this.settings.bonusPercent * item.quantity;
+          if (this._hasDiscount(item)) {
+            bonus -= bonus * receipt.discount;
+          }
 
-        return totalBonus - totalBonus * (receipt.discount || 0) / 100;
+          return Math.ceil(bonus);
+        }));
       }
     }));
 
@@ -135,4 +145,4 @@ export default class CashCtrl {
   }
 }
 
-CashCtrl.$inject = ['$state', 'apiCached', 'Receipt', 'categories'];
+CashCtrl.$inject = ['$state', 'apiCached', 'Auth', 'Receipt', 'categories'];

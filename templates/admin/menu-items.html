@@ -25,10 +25,14 @@
                 <input type="checkbox" ng-model="vm.newEntity.isComposite">
                 Составной
               </label>
+              <!-- <label> -->
+              <!--   <input type="checkbox" ng-model="vm.newEntity.hasDiscount"> -->
+              <!--   Со скидкой -->
+              <!-- </label> -->
             </div>
             <div class="row">
               <div class="col-md-7">
-                <div class="form-group" ng-hide="vm.newEntity.isComposite">
+                <div class="form-group">
                   <label>Категория</label>
                   <input type="text" class="form-control" required
                          ng-model="vm.newEntity.category"
@@ -86,6 +90,20 @@
                 <input type="checkbox" ng-model="vm.newEntity.isComposite">
                 Составной
               </label>
+            </div>
+            <div class="row">
+              <div class="col-md-7">
+                <div class="form-group">
+                  <label>Категория</label>
+                  <input type="text" class="form-control" required
+                         ng-model="vm.newEntity.category"
+                         uib-typeahead="category as category.name for
+                                        category in vm.categories | filter:$viewValue"
+                         typeahead-editable="false"
+                         typeahead-min-length="0"
+                         typeahead-on-select="vm.updateProductName()">
+                </div>
+              </div>
             </div>
             <div class="row">
               <div class="col-md-7">

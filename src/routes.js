@@ -36,7 +36,8 @@ export default function($stateProvider) {
 
     .state('barista.cashbox.defaultMenu', {
       url: '',
-      controller: ['$state', 'categories', ($state, categories) => {
+      controller: ['$state', 'categories', 'Auth', ($state, categories, Auth) => {
+        if (!Auth.myUser()) { return $state.go('login'); }
         if (categories[0] && categories[0].id) {
           $state.go('barista.cashbox.menu', {
             categoryId: categories[0].id

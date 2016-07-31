@@ -29,9 +29,9 @@ export default function Auth($http, $state) {
     },
 
     myUser() {
-      let user = JSON.parse(localStorage.getItem('user'));
+      let userString = localStorage.getItem('user');
 
-      return user || {};
+      return userString ? JSON.parse(userString) : null;
     },
 
     logout() {
