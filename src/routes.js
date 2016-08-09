@@ -5,6 +5,7 @@ import UserListCtrl from './controllers/users';
 import ProductListCtrl from './controllers/products';
 import MenuItemCtrl from './controllers/menu-items';
 import CategoryCtrl from './controllers/categories';
+import ShiftCtrl from './controllers/shifts';
 import StoreListCtrl from './controllers/stores';
 import StockCtrl from './controllers/stock/remains';
 import DeliveryCreateCtrl from './controllers/stock/create-delivery';
@@ -147,6 +148,13 @@ export default function($stateProvider) {
       url: '/categories',
       templateUrl: '/templates/admin/categories.html',
       controller: CategoryCtrl,
+      controllerAs: 'vm'
+    })
+
+    .state('admin.shifts', {
+      url: '/shifts',
+      templateUrl: '/templates/admin/shifts.html',
+      controller: ShiftCtrl,
       controllerAs: 'vm'
     });
 }

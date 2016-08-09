@@ -9,6 +9,7 @@ import Delivery from './delivery';
 import Product from './product';
 import MenuItem from './menu-item';
 import Category from './category';
+import Shift from './shift';
 import apiErrorHanler from './api-error-handler';
 
 import apiCached from './api-cached';
@@ -25,6 +26,7 @@ angular.module('app.services', [ngResource])
 .service('apiCached', apiCached)
 .service('Receipt', Receipt)
 .service('Category', Category)
+.service('Shift', Shift)
 .service('apiErrorHandler', apiErrorHanler);
 
 export default 'app.services';

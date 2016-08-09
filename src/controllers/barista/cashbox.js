@@ -70,7 +70,7 @@ export default class CashCtrl {
       return;
     }
 
-    this.Receipt.closeShift().then(() => {
+    this.Receipt.closeShift(this.payment).then(() => {
       this.receipts = [];
 
       this.$state.go('barista.cashbox.shiftClosed');

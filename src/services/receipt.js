@@ -22,10 +22,10 @@ function Receipt($http) {
       return JSON.parse(localStorage.getItem('receipts'));
     },
 
-    closeShift() {
+    closeShift(salary) {
       let receipts = JSON.parse(localStorage.getItem('receipts'));
 
-      return $http.post(`${API_BASE}/shift`, receipts)
+      return $http.post(`${API_BASE}/shift`, {receipts, salary})
       .then(() => {
         localStorage.setItem('receipts', '[]');
       });

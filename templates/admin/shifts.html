@@ -1,0 +1,23 @@
+<section class="content-header">
+  <h1>Смены</h1>
+</section>
+
+<section class="content">
+  <div class="row">
+    <div class="col-xs-6 list-goods-box">
+      <div class="box">
+        <table class="table table-bordered table-hover"
+               ng-table="vm.tableParams">
+          <tr ng-repeat="shift in $data">
+            <td data-title="'id'">{{shift.id}}</td>
+            <td data-title="'Открыта'">{{shift.createdAt | date:'dd.MM.yyyy HH:mm'}}</td>
+            <td data-title="'Закрыта'">{{shift.closedAt | date:'dd.MM.yyyy HH:mm'}}</td>
+            <td data-title="'Бариста'">{{shift.user.name}}</td>
+            <td data-title="'Касса'">{{shift.total | currency:''}}</td>
+            <td data-title="'З/П'">{{shift.salary | currency:''}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
