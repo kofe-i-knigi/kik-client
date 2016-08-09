@@ -112,12 +112,6 @@ export default class CashCtrl {
     this.$state.go(this.$state.current, {}, {reload: true});
   }
 
-  _hasDiscount(item) {
-    const category = find(this.categories, {id: item.categoryId});
-
-    return category && category.hasDiscount;
-  }
-
   _refreshTotalCash() {
     this.totalCash = sum(this.receipts.map(receipt => {
       return receipt.selfPaid ? -receipt.total : receipt.total;
@@ -132,7 +126,7 @@ export default class CashCtrl {
         return sum(receipt.items.map((item) => {
           const markup = Math.max(+item.price - item.costPrice, 0);
           var bonus = markup / 100 * this.settings.bonusPercent * item.quantity;
-          if (this._hasDiscount(item)) {
+          if (item.hasDiscount) {
             bonus -= bonus * receipt.discount;
           }
 

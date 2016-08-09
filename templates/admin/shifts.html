@@ -15,6 +15,7 @@
             <td data-title="'Бариста'">{{shift.user.name}}</td>
             <td data-title="'Касса'">{{shift.total | currency:''}}</td>
             <td data-title="'З/П'">{{shift.salary | currency:''}}</td>
+            <td data-title="'З/П (без вычетов)'">{{shift.fullSalary | currency:''}}</td>
           </tr>
         </table>
       </div>
