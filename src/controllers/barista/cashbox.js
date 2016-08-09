@@ -86,7 +86,7 @@ export default class CashCtrl {
     } else {
       this.receipt.total = sum(this.receipt.items.map(item => {
         var price = +item.price;
-        if (this._hasDiscount(item)) {
+        if (item.hasDiscount) {
           price -= price * this.receipt.discount;
         }
 
