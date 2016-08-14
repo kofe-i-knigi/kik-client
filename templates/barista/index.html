@@ -11,7 +11,7 @@
         <button class="btn btn-lg btn-success" ng-click="cashbox.syncWithBackend()">
           <i class="fa fa-refresh"></i>
         </button>
-        <div class="btn btn-lg btn-cappuccino"
+        <div class="btn btn-lg btn-cappuccino" ng-hide="cashbox.shiftClosed"
              ng-click="cashbox.closeShift()">Закрыть смену</div>
       </div>
     </div>

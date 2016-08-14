@@ -6,10 +6,9 @@ export default class RemainsCtrl {
     this.Stock = Stock;
     this.tableParams = new NgTableParams({
       page: 1,
-      count: 20,
+      count: 15,
       sorting: {},
-      filter : {},
-      // filter: this.filters,
+      filter: this.filters,
       filterDelay: 1000
     }, {
       getData(params) {
@@ -18,6 +17,7 @@ export default class RemainsCtrl {
         });
 
         return Stock.query(query).$promise.then((data) => {
+          console.log(data.$total);
           params.total(data.$total || data.length);
 
           return data;

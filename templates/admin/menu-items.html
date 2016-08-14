@@ -193,8 +193,28 @@
   </form>
 
   <div class="row">
+    <div class="col-xs-3">
+      <div class="box search-box">
+        <div class="form form-horizontal">
+          <div class="form-group">
+            <div class="col-xs-3">
+              <label>Поиск</label>
+            </div>
+            <div class="col-xs-9">
+              <input type="text" class="form-control"
+                     ng-model="vm.filters.name"
+                     ng-model-options="{debounce: 300}"
+                     ng-change="vm.tableParams.refresh()">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
     <div class="col-xs-12">
-      <div class="box  list-goods-box">
+      <div class="box list-goods-box">
         <table ng-table="vm.tableParams" class="table table-bordered table-hover">
           <colgroup>
             <col width="30%">
@@ -205,7 +225,7 @@
             <col width="10%">
           </colgroup>
           <tr ng-repeat="menuItem in $data">
-            <td data-title="'Название'" >
+            <td data-title="'Название'" sortable="'name'">
               <div class="menu-product-name">
                 <button class="btn btn-xs btn-primary dropdown" ng-if="menuItem.isComposite" ng-click='menuItem.show =
                 !menuItem.show'>
@@ -263,7 +283,7 @@
                 </li>
               </div>
             </td>
-            <td data-title="'Категория'">
+            <td data-title="'Категория'" sortable="'categoryId'">
               <input type="text" class="form-control input-sm" required
                      ng-model="menuItem.category"
                      uib-typeahead="product as product.name for
@@ -272,7 +292,7 @@
                      typeahead-min-length="0"
                      typeahead-on-select="vm.updateEntity(menuItem)">
             </td>
-            <td data-title="'Цена'">
+            <td data-title="'Цена'" sortable="'price'">
               <editable-text ng-model="menuItem.price" change="vm.updateEntity(menuItem)" required>
             </td>
             <td data-title="'Составной'">

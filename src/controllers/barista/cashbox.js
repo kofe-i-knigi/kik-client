@@ -23,6 +23,8 @@ export default class CashCtrl {
 
     this._refreshTotalCash();
 
+    this.shiftClosed = false;
+
     apiCached('/settings').then(settings => {
       this.settings = settings;
 
@@ -69,6 +71,8 @@ export default class CashCtrl {
     if (!confirm('Вы уверены?')) {
       return;
     }
+
+    this.shiftClosed = true;
 
     this.Receipt.closeShift(this.payment).then(() => {
       this.receipts = [];

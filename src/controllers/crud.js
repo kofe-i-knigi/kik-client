@@ -9,8 +9,7 @@ export default class CrudCtrl {
       page: 1,
       count: 20,
       sorting: {},
-      filter : {},
-      // filter: this.filters,
+      filter: this.filters,
       filterDelay: 1000
     }, {
       getData(params) {

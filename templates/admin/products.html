@@ -43,6 +43,27 @@
       </div>
     </div>
   </div>
+
+  <div class="row">
+    <div class="col-xs-3">
+      <div class="box search-box">
+        <div class="form form-horizontal">
+          <div class="form-group">
+            <div class="col-xs-3">
+              <label>Поиск</label>
+            </div>
+            <div class="col-xs-9">
+              <input type="text" class="form-control"
+                     ng-model="vm.filters.name"
+                     ng-model-options="{debounce: 300}"
+                     ng-change="vm.tableParams.refresh()">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="row">
     <div class="col-xs-12">
       <div class="box list-goods-box">
@@ -56,11 +77,12 @@
           </colgroup>
 
           <tr ng-repeat="product in $data">
-            <td data-title="'Название'">
+            <td data-title="'Название'" sortable="'name'">
               <editable-text ng-model="product.name"  change="vm.updateEntity(product)" required>
             </td>
-            <td data-title="'Себестоимость'">
-              <editable-text ng-model="product.costPrice" change="vm.updateEntity(product)" required>
+            <td data-title="'Себестоимость'" sortable="'costPrice'">
+              <editable-text ng-model="product.costPrice"
+                             change="vm.updateEntity(product)" required>
             </td>
             <td data-title="'Ингридиент'">
               <input type="checkbox" ng-model="product.isIngridient" ng-change="vm.updateEntity(product)">

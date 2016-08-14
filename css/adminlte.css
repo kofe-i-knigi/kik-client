@@ -4743,9 +4743,7 @@ table.text-center th {
 }
 
 .ng-table-counts { display: none !important; }
- .list-goods-box{
-  margin-top: 20px;
-}
+
 .fa.fa-times {
     color: #D9532E;
     font-size: 23px;
@@ -5368,4 +5366,14 @@ body {
 .editable-input-group {
   display: inline-block;
   width: 90%;
+}
+
+.sortable {
+  cursor: pointer;
+}
+
+.search-box {
+  margin-top: 15px;
+  padding: 15px;
+  padding-bottom: 5px;
 }
