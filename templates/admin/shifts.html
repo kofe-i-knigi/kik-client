@@ -4,6 +4,45 @@
 
 <section class="content">
   <div class="row">
+    <div class="col-xs-6">
+      <div class="box search-box">
+        <div style="display:inline-block; min-height:290px;">
+          <div uib-datepicker ng-model="vm.filters.$gt"
+               ng-change="vm.tableParams.reload()"
+               class="well well-sm"></div>
+        </div>
+        <div style="display:inline-block; min-height:290px;">
+          <div uib-datepicker ng-model="vm.filters.$lt"
+               ng-change="vm.tableParams.reload()"
+               class="well well-sm"></div>
+        </div>
+
+        <div class="form form-horizontal">
+          <div class="form-group">
+            <div class="col-xs-2">
+              <label>Бариста</label>
+            </div>
+            <div class="col-xs-9">
+              <select class="form-control"
+                      ng-model="vm.filters.userId"
+                      ng-change="vm.tableParams.reload()"
+                      ng-options="user.id as user.name for user in
+                      vm.users">
+              </select>
+            </div>
+            <div>
+              <button class="btn btn-sm btn-danger"
+                      ng-click="vm.resetUser()">
+                <i class="glyphicon glyphicon-remove"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
     <div class="col-xs-6 list-goods-box">
       <div class="box">
         <table class="table table-bordered table-hover"
@@ -16,6 +55,12 @@
             <td data-title="'Касса'">{{shift.total | currency:''}}</td>
             <td data-title="'З/П'">{{shift.salary | currency:''}}</td>
             <td data-title="'З/П (без вычетов)'">{{shift.fullSalary | currency:''}}</td>
+          </tr>
+          <tr>
+            <td colspan="4">Итого</td>
+            <td>{{vm.totalCash | currency:''}}</td>
+            <td>{{vm.totalSalary | currency:''}}</td>
+            <td>{{vm.totalFullSalary | currency:''}}</td>
           </tr>
         </table>
       </div>
