@@ -1,6 +1,4 @@
-import {API_BASE} from '../config';
-
-function Receipt($http) {
+function Receipt() {
   if (!localStorage.getItem('receipts')) {
     localStorage.setItem('receipts', '[]');
   }
@@ -22,17 +20,12 @@ function Receipt($http) {
       return JSON.parse(localStorage.getItem('receipts'));
     },
 
-    closeShift(salary) {
-      let receipts = JSON.parse(localStorage.getItem('receipts'));
-
-      return $http.post(`${API_BASE}/shift`, {receipts, salary})
-      .then(() => {
-        localStorage.setItem('receipts', '[]');
-      });
+    removeAll() {
+      localStorage.setItem('receipts', '[]');
     }
   };
 }
 
-Receipt.$inject = ['$http'];
+Receipt.$inject = [];
 
 export default Receipt;

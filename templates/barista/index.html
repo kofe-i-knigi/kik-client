@@ -6,19 +6,20 @@
         Родник ( Труда 203/3 )
       </div>
       <div class="pull-right">
-        <span class="kassa">Касса: {{cashbox.totalCash | currency}}</span>
-        <span class="reward">З/П: {{cashbox.payment | currency}}</span>
+        <span class="reward">З/П: {{cashbox.shift.salary || cashbox.payment | currency}}</span>
         <button class="btn btn-lg btn-success" ng-click="cashbox.syncWithBackend()">
           <i class="fa fa-refresh"></i>
         </button>
-        <div class="btn btn-lg btn-cappuccino" ng-hide="cashbox.shiftClosed"
-             ng-click="cashbox.closeShift()">Закрыть смену</div>
+        <div class="btn btn-lg btn-cappuccino"
+             ng-hide="cashbox.shift.isProcessing || cashbox.shift.isClosed"
+             ng-click="cashbox.processShift()">Закрыть смену</div>
       </div>
     </div>
     <!-- START row-->
     <div class="row">
       <div class="col-xs-12 col-sm-8 col-md-9">
-        <ul class="nav nav-tabs">
+        <ul class="nav nav-tabs"
+            ng-hide="cashbox.shift.isProcessing || cashbox.shift.isClosed">
           <li ng-repeat="category in cashbox.categories" ui-sref-active="active">
             <a ui-sref="barista.cashbox.menu({categoryId: category.id})">{{category.name}}</a>
           </li>

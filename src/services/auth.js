@@ -1,6 +1,6 @@
 import {API_BASE} from '../config';
 
-export default function Auth($http, $state) {
+export default function Auth($http, $state, shiftCashbox) {
   return {
     logIn(creds) {
       const promise = $http.post(`${API_BASE}/auth/login`, creds);
@@ -8,6 +8,7 @@ export default function Auth($http, $state) {
       promise.then((res) => {
         localStorage.idToken = res.data.token;
         localStorage.user = JSON.stringify(res.data);
+        shiftCashbox.open();
       });
 
       return promise;
@@ -43,4 +44,4 @@ export default function Auth($http, $state) {
   }
 }
 
-Auth.$inject = ['$http', '$state'];
+Auth.$inject = ['$http', '$state', 'shiftCashbox'];

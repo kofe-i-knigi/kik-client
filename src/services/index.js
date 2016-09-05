@@ -10,6 +10,7 @@ import Product from './product';
 import MenuItem from './menu-item';
 import Category from './category';
 import Shift from './shift';
+import shiftCashbox from './shift-cashbox';
 import apiErrorHanler from './api-error-handler';
 
 import apiCached from './api-cached';
@@ -27,6 +28,7 @@ angular.module('app.services', [ngResource])
 .service('Receipt', Receipt)
 .service('Category', Category)
 .service('Shift', Shift)
+.service('shiftCashbox', shiftCashbox)
 .service('apiErrorHandler', apiErrorHanler);
 
 export default 'app.services';

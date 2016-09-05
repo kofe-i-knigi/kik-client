@@ -1,0 +1,36 @@
+<div class="col-xs-12 positions">
+  <form class="form form-horizontal" novalidate
+    ng-submit="vm.closeShift()">
+    <div class="form-group">
+      <div class="col-xs-4">
+        <label>З/П</label>
+      </div>
+      <div class="col-xs-6">
+        {{cashbox.payment | currency}}
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-xs-4">
+        <label>Касса</label>
+      </div>
+      <div class="col-xs-6">
+        <input class="form-control" type="text"
+               ng-model="vm.cash" required>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-xs-4">
+        <label>Безнал</label>
+      </div>
+      <div class="col-xs-6">
+        <input class="form-control" type="text"
+               ng-model="vm.cashless" required>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-xs-10">
+        <button class="btn btn-success" type="submit">Закрыть смену</button>
+      </div>
+    </div>
+  </form>
+</div>

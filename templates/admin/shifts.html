@@ -43,7 +43,7 @@
   </div>
 
   <div class="row">
-    <div class="col-xs-6 list-goods-box">
+    <div class="col-xs-12 list-goods-box">
       <div class="box">
         <table class="table table-bordered table-hover"
                ng-table="vm.tableParams">
@@ -52,15 +52,24 @@
             <td data-title="'Открыта'">{{shift.createdAt | date:'dd.MM.yyyy HH:mm'}}</td>
             <td data-title="'Закрыта'">{{shift.closedAt | date:'dd.MM.yyyy HH:mm'}}</td>
             <td data-title="'Бариста'">{{shift.user.name}}</td>
-            <td data-title="'Касса'">{{shift.total | currency:''}}</td>
             <td data-title="'З/П'">{{shift.salary | currency:''}}</td>
             <td data-title="'З/П (без вычетов)'">{{shift.fullSalary | currency:''}}</td>
+            <td data-title="'Касса (пробито)'">{{shift.total | currency:''}}</td>
+            <td data-title="'Касса (отчет)'">{{shift.cash | currency:''}}</td>
+            <td data-title="'Безнал (отчет)'">{{shift.cashless | currency:''}}</td>
+            <td data-title="'Разница с отчетом'"
+                ng-class="{danger: shift.difference !== 0}"
+                >{{shift.difference | currency:''}}</td>
           </tr>
           <tr>
-            <td colspan="4">Итого</td>
-            <td>{{vm.totalCash | currency:''}}</td>
+            <td colspan="4"><strong>Итого</strong></td>
             <td>{{vm.totalSalary | currency:''}}</td>
             <td>{{vm.totalFullSalary | currency:''}}</td>
+            <td>{{vm.totalTotal | currency:''}}</td>
+            <td>{{vm.totalCash | currency:''}}</td>
+            <td>{{vm.totalCashless | currency:''}}</td>
+            <td ng-class="{danger: vm.totaldifference !== 0}"
+                >{{vm.totalDifference | currency:''}}</td>
           </tr>
         </table>
       </div>

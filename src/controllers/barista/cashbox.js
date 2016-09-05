@@ -8,8 +8,9 @@ const defaultReceipt = {
 };
 
 export default class CashCtrl {
-  constructor($state, apiCached, Auth, Receipt, categories) {
+  constructor($state, apiCached, Auth, Receipt, shiftCashbox, categories) {
     this.Receipt = Receipt;
+    this.shiftCashbox = shiftCashbox;
     this.$state = $state;
 
     this.user = Auth.myUser();
@@ -23,7 +24,7 @@ export default class CashCtrl {
 
     this._refreshTotalCash();
 
-    this.shiftClosed = false;
+    this.shift = shiftCashbox.get();
 
     apiCached('/settings').then(settings => {
       this.settings = settings;
@@ -67,18 +68,15 @@ export default class CashCtrl {
     this._refreshTotalCash();
   }
 
-  closeShift() {
+  processShift() {
     if (!confirm('Вы уверены?')) {
       return;
     }
 
-    this.shiftClosed = true;
+    this.shift = this.shiftCashbox.process(this.payment);
+    this.receipts = [];
 
-    this.Receipt.closeShift(this.payment).then(() => {
-      this.receipts = [];
-
-      this.$state.go('barista.cashbox.shiftClosed');
-    });
+    this.$state.go('barista.cashbox.shiftReport');
   }
 
   recalc() {
@@ -143,4 +141,11 @@ export default class CashCtrl {
   }
 }
 
-CashCtrl.$inject = ['$state', 'apiCached', 'Auth', 'Receipt', 'categories'];
+CashCtrl.$inject = [
+  '$state',
+  'apiCached',
+  'Auth',
+  'Receipt',
+  'shiftCashbox',
+  'categories'
+];

@@ -13,6 +13,7 @@ import DashboardCtrl from './controllers/dashboard';
 import CashboxCtrl from './controllers/barista/cashbox';
 import BaristaMenuCtrl from './controllers/barista/menu';
 import BaristaShiftClosedCtrl from './controllers/barista/shift-closed';
+import BaristaShiftReportCtrl from './controllers/barista/shift-report';
 
 export default function($stateProvider) {
   $stateProvider
@@ -37,8 +38,14 @@ export default function($stateProvider) {
 
     .state('barista.cashbox.defaultMenu', {
       url: '',
-      controller: ['$state', 'categories', 'Auth', ($state, categories, Auth) => {
+      controller: ['$state', 'categories', 'Auth', 'shiftCashbox',
+      ($state, categories, Auth, shiftCashbox) => {
         if (!Auth.myUser()) { return $state.go('login'); }
+        if (shiftCashbox.get().isClosed) {
+          return $state.go('barista.cashbox.shiftClosed');
+        } else if (shiftCashbox.get().isProcessing) {
+          return $state.go('barista.cashbox.shiftReport');
+        }
         if (categories[0] && categories[0].id) {
           $state.go('barista.cashbox.menu', {
             categoryId: categories[0].id
@@ -57,6 +64,13 @@ export default function($stateProvider) {
     .state('barista.cashbox.preview', {
       url: 'preview',
       templateUrl: '/templates/barista/preview.html',
+      controllerAs: 'vm'
+    })
+
+    .state('barista.cashbox.shiftReport', {
+      url: 'shiftreport',
+      templateUrl: '/templates/barista/shift-report.html',
+      controller: BaristaShiftReportCtrl,
       controllerAs: 'vm'
     })
 

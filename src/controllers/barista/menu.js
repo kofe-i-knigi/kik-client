@@ -1,6 +1,12 @@
 export default class MenuCtrl {
-  constructor($stateParams, apiCached) {
+  constructor($state, $stateParams, apiCached, shiftCashbox) {
     this.apiCached = apiCached;
+
+    if (shiftCashbox.get().isClosed) {
+      return $state.go('barista.cashbox.shiftClosed');
+    } else if (shiftCashbox.get().isProcessing) {
+      return $state.go('barista.cashbox.shiftReport');
+    }
 
     apiCached(`/menu/${$stateParams.categoryId}`).then(menuItems => {
       this.menuItems = menuItems;
@@ -14,4 +20,4 @@ export default class MenuCtrl {
   }
 }
 
-MenuCtrl.$inject = ['$stateParams', 'apiCached'];
+MenuCtrl.$inject = ['$state', '$stateParams', 'apiCached', 'shiftCashbox'];

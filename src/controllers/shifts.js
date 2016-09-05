@@ -10,9 +10,12 @@ export default class CategoryCtrl extends CrudCtrl {
     this.filters.$lt = new Date();
 
     ngTableEventsChannel.onAfterReloadData(({data}) => {
-      this.totalCash = sumBy(data, 'total');
+      this.totalTotal = sumBy(data, 'total');
       this.totalSalary = sumBy(data, 'salary');
       this.totalFullSalary = sumBy(data, 'fullSalary');
+      this.totalCash = sumBy(data, 'cash');
+      this.totalCashless = sumBy(data, 'cashless');
+      this.totalDifference = sumBy(data, 'difference');
     });
   }
 
