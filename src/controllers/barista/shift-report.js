@@ -19,6 +19,8 @@ export default class ShiftClosedCtrl {
       return;
     }
 
+    this.sending = true;
+
     this.shiftCashbox.close(
       +this.cash,
       +this.cashless
