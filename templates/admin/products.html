@@ -70,7 +70,8 @@
         <table ng-table="vm.tableParams" class="table table-bordered table-hover">
           <colgroup>
             <col width="35%">
-            <col width="35%">
+            <col width="15%">
+            <col width="20%">
             <col width="10%">
             <col width="10%">
             <col width="10%">
@@ -83,6 +84,10 @@
             <td data-title="'Себестоимость'" sortable="'costPrice'">
               <editable-text ng-model="product.costPrice"
                              change="vm.updateEntity(product)" required>
+            </td>
+            <td data-title="'Стандартное количество'">
+              <editable-text ng-model="product.standardQuantity"
+                             change="vm.updateEntity(product)">
             </td>
             <td data-title="'Ингридиент'">
               <input type="checkbox" ng-model="product.isIngridient" ng-change="vm.updateEntity(product)">

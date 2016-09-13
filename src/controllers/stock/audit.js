@@ -1,8 +1,7 @@
 import {extend} from 'lodash';
 
-export default class RemainsCtrl {
+export default class AuditCtrl {
   constructor($stateParams, Stock, NgTableParams) {
-    this.filters = {};
     this.Stock = Stock;
     this.tableParams = new NgTableParams({
       page: 1,
@@ -30,9 +29,12 @@ export default class RemainsCtrl {
       storeId: product.stock[0].storeId,
       productId: product.id
     }, {
-      quantity: product.stock[0].quantity
+      quantity: product.auditQuantity
+    })
+    .$promise.then(() => {
+      product.isAudited = true;
     });
   }
 }
 
-RemainsCtrl.$inject = ['$stateParams', 'Stock', 'NgTableParams'];
+AuditCtrl.$inject = ['$stateParams', 'Stock', 'NgTableParams'];

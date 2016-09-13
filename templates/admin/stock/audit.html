@@ -1,0 +1,42 @@
+<section class="content-header">
+  <h1>Ревизия</h1>
+</section>
+
+<section class="content">
+  <div class="row">
+    <div class="col-xs-6">
+      <div class="box list-goods-box">
+        <table ng-table="vm.tableParams" class="table table-bordered table-hover">
+          <tr ng-repeat="product in $data"
+              ng-class="{success: product.isAudited}">
+            <td data-title="'Название'" sortable="'name'">
+              {{::product.name}}
+            </td>
+            <td data-title="'Остаток'">
+              {{::product.stock[0].quantity}} {{::product.unit}}
+            </td>
+            <td data-title="'Ревизия'">
+              <input class="form-control" type="text"
+                     ng-model="product.auditQuantity">
+            </td>
+            <td data-title="'Разница'">
+              <span ng-if="product.auditQuantity"
+                 ng-class="{wrong: product.auditQuantity -
+                 product.stock[0].quantity < 0}">
+                {{product.auditQuantity - product.stock[0].quantity}} {{::product.unit}}
+              </span>
+            </td>
+            <td data-title="'Сохранить'">
+              <button type="button"
+                      class="btn btn-success btn-sm"
+                      ng-click="vm.updateQuantity(product)"
+                      ng-disabled="!product.auditQuantity">
+                <i class="fa fa-check" aria-hidden="true"></i>
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>

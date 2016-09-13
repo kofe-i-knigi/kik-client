@@ -5357,6 +5357,7 @@ body {
 .editable-preview {
   display: inline-block;
   width: 100%;
+  min-height: 17px;
 }
 
 .text-editor > form {
@@ -5376,4 +5377,8 @@ body {
   margin-top: 15px;
   padding: 15px;
   padding-bottom: 5px;
+}
+
+.wrong {
+  color: #a22a2a;
 }

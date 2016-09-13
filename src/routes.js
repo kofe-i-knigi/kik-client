@@ -8,6 +8,8 @@ import CategoryCtrl from './controllers/categories';
 import ShiftCtrl from './controllers/shifts';
 import StoreListCtrl from './controllers/stores';
 import StockCtrl from './controllers/stock/remains';
+import StockShortageCtrl from './controllers/stock/shortage';
+import StockAuditCtrl from './controllers/stock/audit';
 import DeliveryCreateCtrl from './controllers/stock/create-delivery';
 import DashboardCtrl from './controllers/dashboard';
 import CashboxCtrl from './controllers/barista/cashbox';
@@ -134,6 +136,20 @@ export default function($stateProvider) {
       url: '',
       templateUrl: '/templates/admin/stock/index.html',
       controller: StockCtrl,
+      controllerAs: 'vm'
+    })
+
+    .state('admin.stock.shortageReport', {
+      url: '/shortage',
+      templateUrl: '/templates/admin/stock/shortage.html',
+      controller: StockShortageCtrl,
+      controllerAs: 'vm'
+    })
+
+    .state('admin.stock.audit', {
+      url: '/audit',
+      templateUrl: '/templates/admin/stock/audit.html',
+      controller: StockAuditCtrl,
       controllerAs: 'vm'
     })
 
