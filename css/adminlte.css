@@ -5382,3 +5382,7 @@ body {
 .wrong {
   color: #a22a2a;
 }
+
+[ui-sref] {
+  cursor: pointer;
+}

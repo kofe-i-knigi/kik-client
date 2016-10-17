@@ -4,7 +4,7 @@
 
 <section class="content">
   <div class="row">
-    <div class="col-xs-6">
+    <div class="col-xs-8">
       <div class="box search-box">
         <div style="display:inline-block; min-height:290px;">
           <div uib-datepicker ng-model="vm.filters.$gt"
@@ -22,7 +22,7 @@
             <div class="col-xs-2">
               <label>Бариста</label>
             </div>
-            <div class="col-xs-9">
+            <div class="col-xs-4">
               <select class="form-control"
                       ng-model="vm.filters.userId"
                       ng-change="vm.tableParams.reload()"
@@ -47,7 +47,7 @@
       <div class="box">
         <table class="table table-bordered table-hover"
                ng-table="vm.tableParams">
-          <tr ng-repeat="shift in $data">
+          <tr ng-repeat="shift in $data" ui-sref="admin.shifts.show({id: shift.id})">
             <td data-title="'id'">{{shift.id}}</td>
             <td data-title="'Открыта'">{{shift.createdAt | date:'dd.MM.yyyy HH:mm'}}</td>
             <td data-title="'Закрыта'">{{shift.closedAt | date:'dd.MM.yyyy HH:mm'}}</td>

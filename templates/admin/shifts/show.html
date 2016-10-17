@@ -1,0 +1,32 @@
+<section class="content-header">
+  <h1>Смена №{{vm.shift.id}} от {{vm.shift.createdAt | date:'dd-MM-yyyy hh:mm'}}</h1>
+</section>
+
+<section class="content">
+  <div class="row">
+    <div class="col-xs-12 list-goods-box">
+      <div class="box">
+        <table class="table table-bordered table-hover">
+          <tr>
+            <th>№</th>
+            <th>Пробит</th>
+            <th>Скидка</th>
+            <th>За свой счет</th>
+            <th>Сумма</th>
+          </tr>
+          <tr ng-repeat="receipt in vm.shift.receipts">
+            <td>{{receipt.id}}</td>
+            <td>{{receipt.createdAt | date:'dd.MM.yyyy HH:mm'}}</td>
+            <td>{{receipt.discount}}%</td>
+            <td><input type="checkbox" ng-model="receipt.selfPaid" disabled></td>
+            <td>{{receipt.total | currency:''}}</td>
+          </tr>
+          <tr>
+            <td colspan="4"><strong>Итого</strong></td>
+            <td>{{vm.total | currency:''}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>

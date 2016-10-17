@@ -1,4 +1,4 @@
-import CrudCtrl from './crud';
+import CrudCtrl from '../crud';
 import {sumBy} from 'lodash';
 
 export default class CategoryCtrl extends CrudCtrl {

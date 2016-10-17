@@ -5,7 +5,8 @@ import UserListCtrl from './controllers/users';
 import ProductListCtrl from './controllers/products';
 import MenuItemCtrl from './controllers/menu-items';
 import CategoryCtrl from './controllers/categories';
-import ShiftCtrl from './controllers/shifts';
+import ShiftListCtrl from './controllers/shifts/list';
+import ShiftShowCtrl from './controllers/shifts/show';
 import StoreListCtrl from './controllers/stores';
 import StockCtrl from './controllers/stock/remains';
 import StockShortageCtrl from './controllers/stock/shortage';
@@ -182,9 +183,23 @@ export default function($stateProvider) {
     })
 
     .state('admin.shifts', {
+      abstract: true,
       url: '/shifts',
-      templateUrl: '/templates/admin/shifts.html',
-      controller: ShiftCtrl,
+      templateUrl: '<ui-sref>',
+      controllerAs: 'vm'
+    })
+
+    .state('admin.shifts.index', {
+      url: '',
+      templateUrl: '/templates/admin/shifts/list.html',
+      controller: ShiftListCtrl,
+      controllerAs: 'vm'
+    })
+
+    .state('admin.shifts.show', {
+      url: '/:id',
+      templateUrl: '/templates/admin/shifts/show.html',
+      controller: ShiftShowCtrl,
       controllerAs: 'vm'
     });
 }
