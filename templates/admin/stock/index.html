@@ -12,8 +12,11 @@
          ui-sref="admin.stock.shortageReport"
          >Сформировать заявку</a>
       <a class="btn btn-danger"
-         ui-sref="admin.stock.audit"
+         ui-sref="admin.audits.new({storeId: vm.storeId})"
          >Провести ревизию</a>
+      <a class="btn btn-danger"
+         ui-sref="admin.audits.list({storeId: vm.storeId})"
+         >Список ревизий</a>
     </div>
   </div>
 

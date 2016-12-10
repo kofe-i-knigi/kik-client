@@ -1,0 +1,33 @@
+<section class="content-header">
+  <h1>Ревизия на складе {{::vm.store.name}} от {{::vm.audit.createdAt |
+  date:'dd-MM-yyyy hh:mm'}}</h1>
+</section>
+
+<section class="content">
+  <div class="row">
+    <div class="col-xs-6">
+      <div class="box list-goods-box">
+        <table ng-table="vm.tableParams" class="table table-bordered table-hover">
+          <tr ng-repeat="product in $data"
+              ng-class="{success: product.isAudited}">
+            <td data-title="'Название'" sortable="'name'">
+              {{::product.name}}
+            </td>
+            <td data-title="'Остаток до ревизии'">
+              {{::product.oldQuantity}} {{::product.unit}}
+            </td>
+            <td data-title="'Ревизия'">
+              {{::product.quantity}} {{::product.unit}}
+            </td>
+            <td data-title="'Разница'">
+              <span ng-class="{wrong: product.quantity - product.oldQuantity < 0}">
+                {{product.quantity - product.oldQuantity  > 0 ? '+' : ''}}
+                {{::product.quantity - product.oldQuantity}} {{::product.unit}}
+              </span>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>

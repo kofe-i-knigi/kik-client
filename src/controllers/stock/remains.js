@@ -2,6 +2,7 @@ import {extend} from 'lodash';
 
 export default class RemainsCtrl {
   constructor($stateParams, Stock, NgTableParams) {
+    this.storeId = $stateParams.storeId;
     this.filters = {};
     this.Stock = Stock;
     this.tableParams = new NgTableParams({

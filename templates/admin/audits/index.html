@@ -1,0 +1,40 @@
+<section class="content-header">
+  <h1>Все ревизии на складе {{::vm.store.name}}</h1>
+</section>
+
+<section class="content">
+  <!-- <div class="row"> -->
+  <!--   <div class="col-xs-3"> -->
+  <!--     <div class="box search-box"> -->
+  <!--       <div class="form form-horizontal"> -->
+  <!--         <div class="form-group"> -->
+  <!--           <div class="col-xs-3"> -->
+  <!--             <label>Поиск</label> -->
+  <!--           </div> -->
+  <!--           <div class="col-xs-9"> -->
+  <!--             <input type="text" class="form-control" -->
+  <!--                    ng-model="vm.filters.name" -->
+  <!--                    ng-model-options="{debounce: 300}" -->
+  <!--                    ng-change="vm.tableParams.refresh()"> -->
+  <!--           </div> -->
+  <!--         </div> -->
+  <!--       </div> -->
+  <!--     </div> -->
+  <!--   </div> -->
+  <!-- </div> -->
+
+  <div class="row">
+    <div class="col-xs-6">
+      <div class="box list-goods-box">
+        <table ng-table="vm.tableParams" class="table table-bordered table-hover">
+          <tr ng-repeat="audit in $data">
+            <td data-title="'Дата'" sortable="'name'">
+              <a class="store-link"
+                 ui-sref="admin.audits.show({auditId: audit.id})"
+                 >{{::audit.createdAt | date:'dd-MM-yyyy HH:mm'}}</a>
+            </td>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>

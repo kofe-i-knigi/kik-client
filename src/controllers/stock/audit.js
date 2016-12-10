@@ -50,11 +50,13 @@ export default class AuditCtrl {
     .filter(item => item.hasOwnProperty('auditQuantity'))
     .map((item) => {
       console.log(item);
-      const {id, auditQuantity} = item;
+      const {id, auditQuantity, name, unit} = item;
       const {quantity} = item.stock[0];
 
       return {
         id,
+        name,
+        unit,
         quantity: auditQuantity,
         oldQuantity: quantity
       };
@@ -62,7 +64,7 @@ export default class AuditCtrl {
 
     this.Stock.audit({storeId}, {items})
     .$promise.then(() => {
-      this.$state.go('admin.stock.remains');
+      this.$state.go('admin.stock.remains', {storeId: this.storeId});
     });
   }
 }

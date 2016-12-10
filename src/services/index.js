@@ -12,6 +12,7 @@ import Category from './category';
 import Shift from './shift';
 import shiftCashbox from './shift-cashbox';
 import apiErrorHanler from './api-error-handler';
+import Audit from './audit';
 
 import apiCached from './api-cached';
 import Receipt from './receipt';
@@ -28,6 +29,7 @@ angular.module('app.services', [ngResource])
 .service('Receipt', Receipt)
 .service('Category', Category)
 .service('Shift', Shift)
+.service('Audit', Audit)
 .service('shiftCashbox', shiftCashbox)
 .service('apiErrorHandler', apiErrorHanler);
 

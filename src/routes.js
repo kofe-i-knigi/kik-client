@@ -11,6 +11,8 @@ import StoreListCtrl from './controllers/stores';
 import StockCtrl from './controllers/stock/remains';
 import StockShortageCtrl from './controllers/stock/shortage';
 import StockAuditCtrl from './controllers/stock/audit';
+import AuditListCtrl from './controllers/audits/list';
+import AuditShowCtrl from './controllers/audits/show';
 import DeliveryCreateCtrl from './controllers/stock/create-delivery';
 import DashboardCtrl from './controllers/dashboard';
 import CashboxCtrl from './controllers/barista/cashbox';
@@ -147,17 +149,42 @@ export default function($stateProvider) {
       controllerAs: 'vm'
     })
 
-    .state('admin.stock.audit', {
-      url: '/audit',
+    .state('admin.stock.createDelivery', {
+      url: '/deliveries/new',
+      templateUrl: '/templates/admin/stock/create-delivery.html',
+      controller: DeliveryCreateCtrl,
+      controllerAs: 'vm'
+    })
+
+    .state('admin.audits', {
+      url: '/stock/:storeId/audits',
+      abstract: true,
+      template: '<ui-view>',
+      resolve: {
+        store: ['$stateParams', 'Store', ($stateParams, Store) => {
+          return Store.get({id: $stateParams.storeId}).$promise;
+        }]
+      }
+    })
+
+    .state('admin.audits.new', {
+      url: '/new',
       templateUrl: '/templates/admin/stock/audit.html',
       controller: StockAuditCtrl,
       controllerAs: 'vm'
     })
 
-    .state('admin.stock.createDelivery', {
-      url: '/deliveries/new',
-      templateUrl: '/templates/admin/stock/create-delivery.html',
-      controller: DeliveryCreateCtrl,
+    .state('admin.audits.list', {
+      url: '',
+      templateUrl: '/templates/admin/audits/index.html',
+      controller: AuditListCtrl,
+      controllerAs: 'vm'
+    })
+
+    .state('admin.audits.show', {
+      url: ':auditId',
+      templateUrl: '/templates/admin/audits/show.html',
+      controller: AuditShowCtrl,
       controllerAs: 'vm'
     })
 
