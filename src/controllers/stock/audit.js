@@ -9,7 +9,7 @@ export default class AuditCtrl {
 
     Stock.query({
       storeId: $stateParams.storeId,
-      limit: 10000
+      count: 10000
     }).$promise.then((data) => {
       this.tableParams.total(data.length);
 
