@@ -1,8 +1,8 @@
 import {extend} from 'lodash';
 
-export default class AuditListCtrl {
-  constructor($stateParams, Audit, NgTableParams, store) {
-    this.Audit = Audit;
+export default class DeliveryListCtrl {
+  constructor($stateParams, Delivery, NgTableParams, store) {
+    this.Delivery = Delivery;
     this.store = store;
     this.newEntityDefault = {};
     this.filters = {};
@@ -19,7 +19,7 @@ export default class AuditListCtrl {
       getData(params) {
         const query = extend(params.url(), {storeId});
 
-        return Audit.query(query).$promise.then((data) => {
+        return Delivery.query(query).$promise.then((data) => {
           params.total(data.$total || data.length);
 
           return data;
@@ -29,4 +29,4 @@ export default class AuditListCtrl {
   }
 }
 
-AuditListCtrl.$inject = ['$stateParams', 'Audit', 'NgTableParams', 'store'];
+DeliveryListCtrl.$inject = ['$stateParams', 'Delivery', 'NgTableParams', 'store'];

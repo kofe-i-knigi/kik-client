@@ -13,6 +13,8 @@ import StockShortageCtrl from './controllers/stock/shortage';
 import StockAuditCtrl from './controllers/stock/audit';
 import AuditListCtrl from './controllers/audits/list';
 import AuditShowCtrl from './controllers/audits/show';
+import DeliveryListCtrl from './controllers/deliveries/list';
+import DeliveryShowCtrl from './controllers/deliveries/show';
 import DeliveryCreateCtrl from './controllers/stock/create-delivery';
 import DashboardCtrl from './controllers/dashboard';
 import CashboxCtrl from './controllers/barista/cashbox';
@@ -185,6 +187,38 @@ export default function($stateProvider) {
       url: ':auditId',
       templateUrl: '/templates/admin/audits/show.html',
       controller: AuditShowCtrl,
+      controllerAs: 'vm'
+    })
+
+    .state('admin.deliveries', {
+      url: '/stock/:storeId/deliveries',
+      abstract: true,
+      template: '<ui-view>',
+      resolve: {
+        store: ['$stateParams', 'Store', ($stateParams, Store) => {
+          return Store.get({id: $stateParams.storeId}).$promise;
+        }]
+      }
+    })
+
+    // .state('admin.deliver.new', {
+    //   url: '/new',
+    //   templateUrl: '/templates/admin/stock/audit.html',
+    //   controller: StockAuditCtrl,
+    //   controllerAs: 'vm'
+    // })
+
+    .state('admin.deliveries.list', {
+      url: '',
+      templateUrl: '/templates/admin/deliveries/index.html',
+      controller: DeliveryListCtrl,
+      controllerAs: 'vm'
+    })
+
+    .state('admin.deliveries.show', {
+      url: '/:deliveryId',
+      templateUrl: '/templates/admin/deliveries/show.html',
+      controller: DeliveryShowCtrl,
       controllerAs: 'vm'
     })
 

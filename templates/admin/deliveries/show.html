@@ -1,0 +1,41 @@
+<section class="content-header">
+  <h1>Доставка на склад {{::vm.store.name}} от {{::vm.delivery.createdAt |
+  date:'dd-MM-yyyy hh:mm'}}</h1>
+</section>
+
+<section class="content">
+  <div class="row">
+    <div class="col-xs-6">
+      <div class="box list-goods-box">
+        <table ng-table="vm.tableParams" class="table table-bordered table-hover">
+          <tr ng-repeat="product in $data">
+            <td data-title="'Товар'" sortable="'name'">
+              {{::product.name}}
+            </td>
+            <td data-title="'Остаток до поставки'">
+              {{::product.oldQuantity}} {{::product.unit}}
+            </td>
+            <td data-title="'Доставка'">
+              {{::product.quantity}} {{::product.unit}}
+            </td>
+            <td data-title="'После поставки'">
+              <span>
+                {{::product.newQuantity}} {{::product.unit}}
+              </span>
+            </td>
+            <td data-title="'Старая цена, руб'">
+              <span>
+                {{::product.oldPrice | currency:''}}
+              </span>
+            </td>
+            <td data-title="'Новая цена, руб'">
+              <span>
+                {{::product.newPrice | currency:''}}
+              </span>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
