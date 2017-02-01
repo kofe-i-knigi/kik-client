@@ -16,6 +16,7 @@ import AuditShowCtrl from './controllers/audits/show';
 import DeliveryListCtrl from './controllers/deliveries/list';
 import DeliveryShowCtrl from './controllers/deliveries/show';
 import DeliveryCreateCtrl from './controllers/stock/create-delivery';
+import WriteoffCreateCtrl from './controllers/stock/create-writeoff';
 import DashboardCtrl from './controllers/dashboard';
 import CashboxCtrl from './controllers/barista/cashbox';
 import BaristaMenuCtrl from './controllers/barista/menu';
@@ -155,6 +156,13 @@ export default function($stateProvider) {
       url: '/deliveries/new',
       templateUrl: '/templates/admin/stock/create-delivery.html',
       controller: DeliveryCreateCtrl,
+      controllerAs: 'vm'
+    })
+
+    .state('admin.stock.createWriteoff', {
+      url: '/deliveries/writeoff',
+      templateUrl: '/templates/admin/stock/create-writeoff.html',
+      controller: WriteoffCreateCtrl,
       controllerAs: 'vm'
     })
 

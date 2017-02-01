@@ -3,25 +3,20 @@
 </section>
 
 <section class="content">
-  <!-- <div class="row"> -->
-  <!--   <div class="col-xs-3"> -->
-  <!--     <div class="box search-box"> -->
-  <!--       <div class="form form-horizontal"> -->
-  <!--         <div class="form-group"> -->
-  <!--           <div class="col-xs-3"> -->
-  <!--             <label>Поиск</label> -->
-  <!--           </div> -->
-  <!--           <div class="col-xs-9"> -->
-  <!--             <input type="text" class="form-control" -->
-  <!--                    ng-model="vm.filters.name" -->
-  <!--                    ng-model-options="{debounce: 300}" -->
-  <!--                    ng-change="vm.tableParams.refresh()"> -->
-  <!--           </div> -->
-  <!--         </div> -->
-  <!--       </div> -->
-  <!--     </div> -->
-  <!--   </div> -->
-  <!-- </div> -->
+  <div class="row">
+    <div class="col-xs-3" style="margin-bottom:15px;">
+      <div class="btn-group text-center" style="white-space:nowrap">
+        <label class="btn btn btn-primary" title="Поставки"
+               type="button" ng-model="vm.filters.isWriteoff"
+               ng-click="vm.tableParams.refresh()" uncheckable
+               uib-btn-radio="false">Поставки</label>
+        <label class="btn btn btn-primary" title="Скидка"
+               type="button" ng-model="vm.filters.isWriteoff"
+               ng-click="vm.tableParams.refresh()" uncheckable
+               uib-btn-radio="true">Списания</label>
+      </div>
+    </div>
+  </div>
 
   <div class="row">
     <div class="col-xs-6">
@@ -33,6 +28,7 @@
                  ui-sref="admin.deliveries.show({deliveryId: delivery.id})"
                  >{{::delivery.createdAt | date:'dd-MM-yyyy HH:mm'}}</a>
             </td>
+            <td>{{::delivery.isWriteoff ? 'Списание' : 'Поставка'}}</td>
         </table>
       </div>
     </div>
