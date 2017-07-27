@@ -5,21 +5,32 @@
 <section class="content">
   <div class="row">
     <div class="col-xs-12">
-      <a class="btn btn-primary"
-         ui-sref="admin.stock.createDelivery"
-         >Новая поставка</a>
-      <a class="btn btn-primary"
-         ui-sref="admin.deliveries.list({storeId: vm.storeId})"
-         >Список поставок</a>
-      <a class="btn btn-success"
-         ui-sref="admin.stock.shortageReport"
-         >Сформировать заявку</a>
-      <a class="btn btn-danger"
-         ui-sref="admin.audits.new({storeId: vm.storeId})"
-         >Провести ревизию</a>
-      <a class="btn btn-danger"
-         ui-sref="admin.audits.list({storeId: vm.storeId})"
-         >Список ревизий</a>
+      <p>
+        <a class="btn btn-primary"
+           ui-sref="admin.stock.createDelivery"
+           >Новая поставка</a>
+        <a class="btn btn-primary"
+           ui-sref="admin.stock.createWriteoff"
+           >Списание</a>
+        <a class="btn btn-primary"
+           ui-sref="admin.deliveries.list({storeId: vm.storeId})"
+           >Список поставок / Списаний</a>
+      </p>
+      <p>
+      </p>
+      <p>
+        <a class="btn btn-success"
+           ui-sref="admin.stock.shortageReport"
+           >Сформировать заявку</a>
+      </p>
+      <p>
+        <a class="btn btn-danger"
+           ui-sref="admin.audits.new({storeId: vm.storeId})"
+           >Провести ревизию</a>
+        <a class="btn btn-danger"
+           ui-sref="admin.audits.list({storeId: vm.storeId})"
+           >Список ревизий</a>
+      </p>
     </div>
   </div>
 

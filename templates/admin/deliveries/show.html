@@ -1,5 +1,8 @@
 <section class="content-header">
-  <h1>Доставка на склад {{::vm.store.name}} от {{::vm.delivery.createdAt |
+  <h1 ng-if="!vm.delivery.isWriteoff"
+    >Доставка на склад {{::vm.store.name}} от {{::vm.delivery.createdAt | date:'dd-MM-yyyy hh:mm'}}</h1>
+  <h1 ng-if="vm.delivery.isWriteoff"
+    >Списание со склада {{::vm.store.name}} от {{::vm.delivery.createdAt |
   date:'dd-MM-yyyy hh:mm'}}</h1>
 </section>
 
@@ -12,23 +15,23 @@
             <td data-title="'Товар'" sortable="'name'">
               {{::product.name}}
             </td>
-            <td data-title="'Остаток до поставки'">
+            <td data-title="'Остаток до'">
               {{::product.oldQuantity}} {{::product.unit}}
             </td>
-            <td data-title="'Доставка'">
+            <td data-title="vm.delivery.isWriteoff ? 'Доставка' : 'Списание'">
               {{::product.quantity}} {{::product.unit}}
             </td>
-            <td data-title="'После поставки'">
+            <td data-title="'Остаток после'">
               <span>
                 {{::product.newQuantity}} {{::product.unit}}
               </span>
             </td>
-            <td data-title="'Старая цена, руб'">
+            <td data-title="'Старая цена, руб'" ng-if='::!vm.delivery.isWriteoff'>
               <span>
                 {{::product.oldPrice | currency:''}}
               </span>
             </td>
-            <td data-title="'Новая цена, руб'">
+            <td data-title="'Новая цена, руб'" ng-if='::!vm.delivery.isWriteoff'>
               <span>
                 {{::product.newPrice | currency:''}}
               </span>

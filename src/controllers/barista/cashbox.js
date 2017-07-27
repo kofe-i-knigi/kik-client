@@ -82,7 +82,7 @@ export default class CashCtrl {
   recalc() {
     if (this.receipt.selfPaid) {
       this.receipt.discount = 0;
-      this.receipt.total = -sum(this.receipt.items.map(item => {
+      this.receipt.total = sum(this.receipt.items.map(item => {
         return +item.costPrice * item.quantity;
       }));
     } else {
@@ -115,15 +115,13 @@ export default class CashCtrl {
   }
 
   _refreshTotalCash() {
-    this.totalCash = sum(this.receipts.map(receipt => {
-      return receipt.selfPaid ? 0 : receipt.total;
-    }));
+    this.totalCash = sum(this.receipts.map(receipt => receipt.total));
   }
 
   _refreshPayment() {
     const todayBonus = sum(this.receipts.map(receipt => {
       if (receipt.selfPaid) {
-        return receipt.total;
+        return 0;
       } else {
         return sum(receipt.items.map((item) => {
           const markup = Math.max(+item.price - item.costPrice, 0);
